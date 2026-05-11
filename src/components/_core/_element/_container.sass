@@ -1,0 +1,22 @@
+$container-padding: r(20px)
+$container-max-width: 98vw
+$container-3xl-width: r(1440px)
+$container-2xl-width: 88vw
+$container-xl-width: 84vw
+$container-lg-width: 90vw
+$container-md-width: 96vw
+$container-sm-width: 90vw
+
+.container
+	width: 100%
+	max-width: $container-max-width
+	margin-right: auto
+	margin-left: auto
+	padding-right: $container-padding
+	padding-left: $container-padding
+	+mq-min(sm)
+		max-width: $container-sm-width
+	+mq-min(md)
+		max-width: $container-md-width
+	+mq-min(lg)
+		max-width: $container-3xl-width

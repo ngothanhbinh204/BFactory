@@ -1,0 +1,59 @@
+
+.grid
+	display: grid
+	grid-template-rows: auto
+
+@for $i from 1 through 12
+	.grid-cols-#{$i}
+		grid-template-columns: repeat(#{$i}, 1fr)
+
+@for $i from 1 through 13
+	.col-start-#{$i}
+		grid-column-start: #{$i}
+
+@for $i from 1 through 12
+	.col-span-#{$i}
+		grid-column: span #{$i}
+
+@for $i from 1 through 13
+	.row-start-#{$i}
+		grid-row-start: #{$i}
+
+@for $i from 1 through 13
+	.row-end-#{$i}
+		grid-row-end: #{$i}
+
+@for $i from 1 through 12
+	.row-span-#{$i}
+		grid-row: span #{$i}
+
+@each $breakpoint, $value in $breakpoints
+	@for $i from 1 through 12
+		@media (min-width: $value)
+			.grid-cols-#{$breakpoint}-#{$i}
+				grid-template-columns: repeat(#{$i}, 1fr)
+
+	@for $i from 1 through 13
+		@media (min-width: $value)
+			.col-start-#{$breakpoint}-#{$i}
+				grid-column-start: #{$i}
+
+	@for $i from 1 through 12
+		@media (min-width: $value)
+			.col-span-#{$breakpoint}-#{$i}
+				grid-column: span #{$i}
+
+	@for $i from 1 through 13
+		@media (min-width: $value)
+			.row-start-#{$breakpoint}-#{$i}
+				grid-row-start: #{$i}
+
+	@for $i from 1 through 13
+		@media (min-width: $value)
+			.row-end-#{$breakpoint}-#{$i}
+				grid-row-end: #{$i}
+
+	@for $i from 1 through 12
+		@media (min-width: $value)
+			.row-span-#{$breakpoint}-#{$i}
+				grid-row: span #{$i}

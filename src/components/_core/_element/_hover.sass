@@ -1,0 +1,24 @@
+.img-zoom-out
+	overflow: hidden
+	img
+		+trans-all
+	+on-hover
+		img
+			transform: scale(1.05)
+
+.img-zoom-in
+	overflow: hidden
+	img
+		+trans-all
+		transform: scale(1.05)
+	+on-hover
+		img
+			transform: scale(1)
+
+.link-hover
+	+on-hover
+		text-decoration: underline
+
+.link-hover-primary
+	+on-hover
+		+text(primary-3)

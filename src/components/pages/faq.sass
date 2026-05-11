@@ -1,0 +1,34 @@
+.faq-item
+	+trans-all
+	overflow: hidden
+	.accordion-trigger
+		padding: r(12px) r(16px)
+		+trans-all
+		background: rgba(35, 63, 135, 0.08)
+
+	.title
+		flex: 1
+		+trans-all
+		cursor: pointer
+
+	.icon
+		+text(primary-4)
+		padding-left: r(20px)
+		position: relative
+		top: r(6px)
+		em
+			+trans-all
+			display: block
+	.accordion-content
+		padding: r(24px)
+	&.open
+
+		.accordion-trigger
+			background: rgba(35, 63, 135, 0.08)
+			+text(primary-4)
+			&.active
+				.icon
+					em
+						+text(primary-4)
+						&::before
+							content: "\f068"

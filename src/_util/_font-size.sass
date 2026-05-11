@@ -1,0 +1,21 @@
+$max: 40
+$offset: 2
+$unit: 'rem' // Feel free to change the unit.
+@mixin list-loop($className,$breakpoint, $styleName)
+	$i: 12
+	@while $i <= $max
+		@if $breakpoint != ''
+			#{$className + $breakpoint + $i}
+				#{$styleName}: clamp(12px, #{$i/19.2 + $unit}, $i + 4 + px)
+			$i: $i + $offset
+		@else
+			#{$className + $i}
+				#{$styleName}: clamp(12px, #{$i/19.2 + $unit}, $i + 4 + px)
+			$i: $i + $offset
+
+// Font-size
+@include list-loop('.fz-', '', 'font-size')
+
+@each $breakpoint in map-keys($breakpoints)
+	@include mq-min($breakpoint)
+		@include list-loop('.fz-', #{$breakpoint + '-'} , 'font-size')

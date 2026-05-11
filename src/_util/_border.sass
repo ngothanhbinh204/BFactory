@@ -1,0 +1,36 @@
+$max: 5
+$offset: 1
+$unit: 'rem' // Feel free to change the unit.
+@mixin list-loop($className, $breakpoint ,$styleName, $styleName-2: '')
+	$i: 1
+	@while $i <= $max
+		@if $breakpoint != ''
+			#{$className + $breakpoint + $i}
+				#{$styleName}: #{($i)/19.2 + $unit}
+				#{$styleName-2}: #{($i)/19.2 + $unit}
+			$i: $i + $offset
+		@else
+			#{$className + $i}
+				#{$styleName}: #{($i)/19.2 + $unit}
+				#{$styleName-2}: #{($i)/19.2 + $unit}
+			$i: $i + $offset
+
+// Borders
+@include list-loop('.border-t-', '' ,'border-top-width')
+@include list-loop('.border-r-', '' , 'border-right-width')
+@include list-loop('.border-b-', '' , 'border-bottom-width')
+@include list-loop('.border-l-', '' , 'border-left-width')
+@include list-loop('.border-x-', '' , 'border-left-width','border-right-width')
+@include list-loop('.border-y-', '' , 'border-top-width','border-bottom-width')
+@include list-loop('.border-', '' , 'border-width')
+
+@each $breakpoint in map-keys($breakpoints)
+
+	@include mq-min($breakpoint)
+		@include list-loop('.border-t-', #{$breakpoint + '-'} , 'border-top-width')
+		@include list-loop('.border-r-', #{$breakpoint + '-'} , 'border-right-width')
+		@include list-loop('.border-b-', #{$breakpoint + '-'} , 'border-bottom-width')
+		@include list-loop('.border-l-', #{$breakpoint + '-'} , 'border-left-width')
+		@include list-loop('.border-x-', #{$breakpoint + '-'} , 'border-left-width','border-right-width')
+		@include list-loop('.border-y-', #{$breakpoint + '-'} , 'border-top-width','border-bottom-width')
+		@include list-loop('.border-', #{$breakpoint + '-'} , 'border-width')

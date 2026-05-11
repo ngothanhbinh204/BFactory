@@ -1,0 +1,166 @@
+.product-item
+	display: flex
+	flex-direction: column
+	position: relative
+	+bg(primary-2)
+	padding-bottom: r(50px)
+	+mq-max(lg)
+		padding-bottom: r(32px)
+	.product-item-image-wrapper
+		aspect-ratio: 320/360
+		display: flex
+		align-items: center
+		justify-content: center
+		position: relative
+		.product-item-shadow
+			position: absolute
+			bottom: 0
+			+center(X)
+			width: r(216px)
+			+trans-all
+			img
+				width: 100%
+		.product-item-image
+			height: r(153px)
+			+trans-all
+			figure
+				height: 100%
+				img
+					width: 100%
+					height: 100%
+					object-fit: contain
+	.product-item-percentage
+		position: absolute
+		top: 0
+		right: 0
+
+	.product-item-content
+		padding: r(10px) r(32px)
+		display: flex
+		flex-direction: column
+		justify-content: flex-end
+		flex: 1 1 0%
+	.product-item-price
+		.woocommerce-Price-amount
+			font-weight: 700
+			+text(primary-4)
+			@extend .body-1
+		.regular-price
+			.woocommerce-Price-amount
+				+text(secondary-500)
+				@extend .body-4
+	.product-item-title
+		+trans-all
+	+on-hover
+		.product-item-image
+			transform: scale(0.8) translateY(r(-40px))
+		.product-item-shadow
+			width: r(120px)
+		.product-item-title
+			+text(primary-3)
+
+.product-home-item
+	.product-item-image-wrapper
+		aspect-ratio: 440/360
+		.product-item-image
+			height: r(210px)
+
+.product-item-percentage
+	padding: r(4px) r(8px)
+	+bg(primary-3)
+	+text(primary-2)
+	@extend .body-4
+	font-weight: 700
+
+.product-sort
+	display: flex
+	gap: r(12px)
+	align-items: center
+	select
+		height: r(36px)
+		padding: 0 r(24px)
+		border: 1px solid color(secondary-200)
+		+fz(14px)
+		background-color: transparent
+		+select-bg($pos: calc(100% - #{r(24px)}))
+		min-width: r(104px)
+		+mq-max(lg)
+			height: r(48px)
+			+fz(20px)
+	&.is-sort
+		select
+			min-width: r(160px)
+
+.filter-item
+	.filter-item-title
+		cursor: pointer
+		+mq-max(lg)
+			em
+				transform: rotate(180deg)
+
+	.filter-item-content
+		+mq-max(lg)
+			display: none
+	.facetwp-type-checkboxes
+		+vstack(12px)
+	.facetwp-checkbox
+		display: flex
+		gap: r(8px)
+		+text(secondary-500)
+		@extend .body-2
+		cursor: pointer
+		&:before
+			+icon("\f0c8")
+			+text(gray-300)
+			+fz(16px)
+		&.checked
+			+text(primary-3)
+			&:before
+				+text(primary-3)
+				+icon("\f14a")
+				font-weight: 900
+
+.filter-list
+	> * + *
+		margin-top: r(24px)
+		padding-top: r(24px)
+		border-top: 1px solid color(secondary-100)
+
+.facetwp-facet-filter_price
+	.facetwp-slider-label,.facetwp-slider-reset
+		display: none
+	.facetwp-slider-wrap
+		padding: r(50px) 0
+		+mq-max(lg)
+			padding: r(32px) 0
+		.noUi-tooltip
+			border: 0
+			font-weight: 700
+			padding: 0
+			background-color: transparent
+			bottom: r(20px)
+		.noUi-horizontal
+			height: r(4px)
+			border: 0
+			+bg(secondary-200)
+			.noUi-handle
+				+circle(20px)
+				border: r(3px) solid color(primary-3)
+				+bg(white)
+				top: 50%
+				transform: translateY(-50%)
+				right: r(-10px)
+				&-lower
+					.noUi-tooltip
+						bottom: r(-28px)
+						+mq-max(lg)
+							left: 0
+							transform: none
+				&-upper
+					.noUi-tooltip
+						+mq-max(lg)
+							right: 0
+							left: auto
+							transform: none
+			.noUi-connect
+				+bg(primary-3)

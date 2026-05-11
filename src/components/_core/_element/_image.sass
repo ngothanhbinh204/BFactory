@@ -1,0 +1,20 @@
+.ratio-1-1
+	+res-ratio(1,1)
+
+.ratio-2-1
+	+res-ratio(2,1)
+
+.ratio-16-9
+	+res-ratio(16,9)
+
+.ratio-16-10
+	+res-ratio(16,10)
+
+*[class*="ratio-"]
+	display: block
+	&.is-contain
+		img
+			object-fit: contain
+
+img
+	font-size: 0

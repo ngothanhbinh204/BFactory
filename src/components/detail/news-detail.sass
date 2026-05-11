@@ -1,0 +1,39 @@
+.news-detail
+	.news-item-date
+		display: flex
+		align-items: center
+		white-space: nowrap
+		gap: r(20px)
+		&::after
+			content: ''
+			display: block
+			width: 100%
+			height: 1px
+			+bg(primary-3)
+
+.sticky-sidebar
+	position: sticky
+	top: calc(var(--header-height) + 20px)
+
+.news-slider
+	--mr: #{r(40px)}
+	--spv: 4
+	margin: 0 r(-100px)
+	+mq-max(2xl)
+		margin: 0
+	+mq-max(lg)
+		--spv: 3.5
+		--mr: #{r(32px)}
+	+mq-max(md)
+		--spv: 2.5
+		--mr: #{r(24px)}
+	+mq-max(sm)
+		--spv: 1.5
+		--mr: #{r(16px)}
+	.swiper-slide
+		width: calc(calc(100% - calc(var(--mr) * calc(var(--spv) - 1)))/var(--spv))
+		padding-right: var(--mr)
+		&:not(:last-child)
+			border-right: 1px solid color(secondary-200)
+			margin-right: var(--mr)
+			

@@ -1,0 +1,21 @@
+$max: 40
+$offset: 4
+$unit: 'rem' // Feel free to change the unit.
+@mixin list-loop($className,$breakpoint, $styleName)
+	$i: 0
+	@while $i <= $max
+		@if $breakpoint != ''
+			#{$className + $breakpoint + $i}
+				#{$styleName}: #{$i/19.2 + $unit}
+			$i: $i + $offset
+		@else
+			#{$className + $i}
+				#{$styleName}: #{$i/19.2 + $unit}
+			$i: $i + $offset
+
+// Border-radius
+@include list-loop('.radius-', '', 'border-radius')
+
+@each $breakpoint in map-keys($breakpoints)
+	@include mq-min($breakpoint)
+		@include list-loop('.radius-', #{$breakpoint + '-'} , 'border-radius')

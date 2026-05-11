@@ -1,0 +1,226 @@
+.global-header
+	position: sticky
+	top: 0
+	z-index: 100
+	background: rgba(0, 0, 0, 0.50)
+	backdrop-filter: blur(15px)
+	+text(primary-2)
+
+.has-banner
+	.global-header
+		position: fixed
+		top: 0
+		width: 100%
+		left: 0
+
+.logo
+	width: r(216px)
+	+mq-max(lg)
+		width: r(160px)
+	a
+		display: block
+		+res-ratio(216,23)
+		img
+			object-fit: contain
+
+.logo-wrapper
+	height: r(90px)
+	display: flex
+	align-items: center
+	justify-content: center
+	+bg(primary-2)
+	padding: r(22px)
+	+mq-max(lg)
+		padding: r(16px)
+
+.btn-login-register
+	+mq-max(lg)
+		border: 1px solid color(primary-1) !important
+		color: color(primary-1) !important
+		font-size: r(20px) !important
+		width: 100%
+
+.language
+	.wpml-ls-legacy-list-horizontal
+		ul
+			display: flex
+			gap: r(8px)
+			@extend .body-3
+			font-weight: 500
+			> li
+				& + li
+					border-left: 1px solid color(secondary-100)
+					padding-left: r(8px)
+				a
+					+text(secondary-200)
+					+trans-all
+				&.wpml-ls-current-language,&:hover
+					a
+						+text(primary-2)
+
+.menu
+	> ul
+		display: flex
+		gap: r(64px)
+		align-items: center
+		+mq-max(2xl)
+			gap: r(24px)
+		+mq-max(lg)
+			flex-direction: column
+			gap: r(32px)
+			align-items: stretch
+		> li
+			> a
+				display: flex
+				align-items: center
+				font-weight: 700
+				+trans-all
+				@extend .body-1
+				position: relative
+				&::after
+					content: ""
+					position: absolute
+					bottom: r(-4px)
+					left: 0
+					width: 100%
+					height: 2px
+					+bg(primary-2)
+					opacity: 0
+					transform: translateY(r(4px))
+					+trans-all
+				+mq-max(lg)
+					height: auto
+					+text(white)
+					text-align: left
+					font-size: r(22px) !important
+				em
+					+fz(18px)
+			+on-hover
+				> a
+					&::after
+						opacity: 1
+						transform: translateY(0)
+			&[class*="current-"]
+				> a
+					&::after
+						opacity: 1
+						transform: translateY(0)
+
+.menu-item-has-children
+	position: relative
+	display: flex
+	align-items: center
+	justify-content: space-between
+	flex-wrap: wrap
+	gap: r(10px)
+	.toggle-sub-menu
+		+mq-min(lg)
+			display: none
+		+mq-max(lg)
+			+box(30px)
+			display: flex
+			+flex-center
+			margin-left: auto
+			+bg(primary-500)
+			+text(white)
+			margin-left: auto
+	.sub-menu
+		display: none
+		z-index: 3
+		+mq-max(lg)
+			+flex-width(100%)
+			padding: 0 0 0 r(16px)
+			margin-top: r(8px)
+			border-left: 1px solid color(white)
+			background: transparent
+			+text(white)
+		+mq-min(lg)
+			position: absolute
+			top: 100%
+			left: 0
+			box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.1)
+			min-width: r(200px)
+			+bg(primary-1)
+			+text(primary-2)
+			padding: r(24px)
+		+bg(white)
+		+content-margins
+			margin-top: r(16px)
+
+		li
+			a
+				@extend .body-3
+			&[class*="current-"],&:hover
+				> a
+					text-decoration: underline
+	+on-hover
+		.sub-menu
+			display: block
+
+.menu-toggle,.search-link
+	+circle(40px)
+	display: flex
+	+flex-center
+	+bg(primary-1)
+	+text(white)
+	font-size: r(14px)
+
+.menu-mobile
+	position: fixed
+	top: 0
+	left: -100%
+	width: 80vw
+	height: 100vh
+	+bg(primary-2)
+	overflow: auto
+	z-index: 102
+	+trans-all
+	+remove(lg,min)
+	&.show
+		left: 0
+	.menu-mobile-wrapper
+		display: flex
+		height: 100%
+		flex-direction: column
+		position: relative
+
+	.close-menu
+		position: absolute
+		+box(44px)
+		display: flex
+		+flex-center
+		+bg(gray-100)
+		top: 0
+		right: 0
+		font-size: r(24px)
+		z-index: 2
+		&.close-mega
+			// right: auto
+			// left: 0
+			padding: r(12px) r(8px)
+			span
+				font-size: r(20px)
+	.menu-mobile-header
+		display: flex
+		align-items: center
+		justify-content: center
+		padding: r(40px) r(24px)
+		// +bg(secondary-100)
+		.logo
+			width: r(200px)
+
+	.menu-mobile-body
+		padding: r(32px)
+		flex: 1
+		+content-margins
+			margin-top: r(20px)
+		.menu-wrapper
+			display: block
+
+.backdrop
+	+fill
+	position: fixed
+	opacity: 0.75
+	+bg(black)
+	z-index: 101
+	display: none

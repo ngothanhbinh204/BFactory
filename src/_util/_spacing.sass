@@ -1,0 +1,60 @@
+$max: 25
+$offset: 1
+$unit: 'rem' // Feel free to change the unit.
+@mixin list-loop($className, $breakpoint ,$styleName, $styleName-2: '')
+	$i: 0
+	@while $i <= $max
+		@if $breakpoint != ''
+			#{$className + $breakpoint + $i}
+				#{$styleName}: #{($i*4)/19.2 + $unit}
+				#{$styleName-2}: #{($i*4)/19.2 + $unit}
+			$i: $i + $offset
+		@else
+			#{$className + $i}
+				#{$styleName}: #{($i*4)/19.2 + $unit}
+				#{$styleName-2}: #{($i*4)/19.2 + $unit}
+			$i: $i + $offset
+
+// Margins
+@include list-loop('.mt-', '' ,'margin-top')
+@include list-loop('.mr-', '' , 'margin-right')
+@include list-loop('.mb-', '' , 'margin-bottom')
+@include list-loop('.ml-', '' , 'margin-left')
+@include list-loop('.mx-', '' , 'margin-left','margin-right')
+@include list-loop('.my-', '' , 'margin-top','margin-bottom')
+@include list-loop('.m-', '' , 'margin')
+
+// Paddings
+@include list-loop('.pt-', '' , 'padding-top')
+@include list-loop('.pr-', '' , 'padding-right')
+@include list-loop('.pb-', '' , 'padding-bottom')
+@include list-loop('.pl-', '' , 'padding-left')
+@include list-loop('.px-', '' , 'padding-left','padding-right')
+@include list-loop('.py-', '' , 'padding-top','padding-bottom')
+@include list-loop('.p-', '' , 'padding')
+
+// Gaps
+@include list-loop('.gap-', '' , 'gap')
+
+@each $breakpoint in map-keys($breakpoints)
+
+	@include mq-min($breakpoint)
+		@include list-loop('.pt-', #{$breakpoint + '-'} , 'padding-top')
+		@include list-loop('.pr-', #{$breakpoint + '-'} , 'padding-right')
+		@include list-loop('.pb-', #{$breakpoint + '-'} , 'padding-bottom')
+		@include list-loop('.pl-', #{$breakpoint + '-'} , 'padding-left')
+		@include list-loop('.px-', #{$breakpoint + '-'} , 'padding-left','padding-right')
+		@include list-loop('.py-', #{$breakpoint + '-'} , 'padding-top','padding-bottom')
+		@include list-loop('.p-', #{$breakpoint + '-'} , 'padding')
+
+	@include mq-min($breakpoint)
+		@include list-loop('.mt-', #{$breakpoint + '-'} , 'margin-top')
+		@include list-loop('.mr-', #{$breakpoint + '-'} , 'margin-right')
+		@include list-loop('.mb-', #{$breakpoint + '-'} , 'margin-bottom')
+		@include list-loop('.ml-', #{$breakpoint + '-'} , 'margin-left')
+		@include list-loop('.mx-', #{$breakpoint + '-'} , 'margin-left','margin-right')
+		@include list-loop('.my-', #{$breakpoint + '-'} , 'margin-top','margin-bottom')
+		@include list-loop('.m-', #{$breakpoint + '-'} , 'margin')
+
+	@include mq-min($breakpoint)
+		@include list-loop('.gap-', #{$breakpoint + '-'} , 'gap')

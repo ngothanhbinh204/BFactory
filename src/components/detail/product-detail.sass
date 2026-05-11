@@ -1,0 +1,113 @@
+.product-image-slider-wrap
+	display: grid
+	grid-template-columns: r(113px) calc(100% - #{r(113px + 24px)})
+	gap: r(24px)
+	+mq-max(lg)
+		display: flex
+		flex-direction: column
+
+.product-detail-thumbnail
+	+mq-max(lg)
+		order: 2
+		max-width: 100%
+		width: 100%
+	.swiper
+		width: 100%
+		+mq-min(lg)
+			height: r(663px)
+			margin: auto 0
+	figure
+		+res-ratio(1,1)
+		overflow: hidden
+		border: 1px solid color(secondary-100)
+		cursor: pointer
+		+trans-all
+		img
+			object-fit: cover
+		.icon-play
+			position: absolute
+			top: 50%
+			left: 50%
+			transform: translate(-50%, -50%)
+			+text(primary-2)
+			+circle(32px)
+			background: rgba(0, 0, 0, 0.50)
+			+fz(14px)
+	.swiper-slide-thumb-active
+		figure
+			border-color: color(primary-3)
+
+.product-detail-images
+	position: relative
+	+mq-max(lg)
+		order: 1
+		width: 100%
+	figure
+		+res-ratio(1,1)
+		padding-top: 98.25%
+		overflow: hidden
+		border: 1px solid color(secondary-100)
+		img
+			object-fit: cover
+	.swiper-navigation
+		position: absolute
+		bottom: r(40px)
+		right: r(40px)
+
+.product-detail-stat
+	@extend .body-2
+	.stat-item
+		display: flex
+		align-items: center
+		gap: r(10px)
+		justify-content: space-between
+		.title
+			font-weight: 700
+			white-space: nowrap
+		.value
+			text-align: right
+		& + .stat-item
+			margin-top: r(8px)
+			padding-top: r(8px)
+			border-top: 1px solid color(secondary-100)
+
+.product-detail-price
+	display: flex
+	align-items: center
+	gap: r(16px)
+	.sale-price
+		@extend .heading-5
+		font-weight: 700
+		+text(primary-3)
+	.regular-price
+		@extend .body-4
+		text-decoration: line-through
+		+text(secondary-500)
+
+.product-detail-bottom
+	margin-top: r(120px)
+	+mq-max(lg)
+		margin-top: r(40px)
+
+.related-products
+	.product-item
+		border: 1px solid color(secondary-200)
+		.product-item-image-wrapper
+			aspect-ratio: 320/260
+
+.product-detail-modal
+	width: r(920px)
+	padding: r(64px)
+	+mq-max(lg)
+		padding: r(48px)
+	.f-button.is-close-btn
+		top: 0 !important
+		right: 0 !important
+		+bg(primary-4)
+		+text(primary-2)
+		+box(48px)
+		opacity: 1
+		border-radius: 0
+		display: flex
+		+flex-center
+		padding: 0

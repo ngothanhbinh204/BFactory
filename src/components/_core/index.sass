@@ -1,0 +1,45 @@
+//Reset
+@import src/_plugins/sass-libraries/reset.sass
+@import src/_plugins/sass-libraries/util.scss
+// @import src/_plugins/sass-libraries/fluid-type.sass
+@import src/_plugins/sass-libraries/family.scss
+@import src/_plugins/sass-libraries/columnizer.scss
+@import src/_plugins/sass-libraries/svg-background.scss
+
+//Gridflex
+$gl-gridName: row
+$gl-gutter: r(40px)
+$gl-gutter-vertical: r(40px)
+$gl-mq-width: 'min-width'
+
+@import src/_plugins/gridlex/src/gridlex.scss
+
+// Global
+html
+	font-size: 3.6vw
+	+mq-min(sm)
+		font-size: 2.4vw
+	+mq-min(md)
+		font-size: 1.5vw
+	+mq-min(lg)
+		font-size: 1.2vw
+	+mq-min(2xl)
+		font-size: 1vw
+body
+	line-height: 1
+	font-family: 'Lato'
+	+text(primary-1)
+	font-weight: 400
+
+.swiper-equal-height
+	.swiper-slide
+		height: auto
+		> *
+			height: 100%
+
+.swiper-no-overflow-hidden
+	+mq-min(lg)
+		overflow: visible
+
+a
+	text-decoration: none

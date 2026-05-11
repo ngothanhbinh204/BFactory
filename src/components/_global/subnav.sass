@@ -1,0 +1,42 @@
+.subnav
+	ul
+		display: inline-flex
+		gap: r(32px)
+		overflow-x: auto
+		white-space: nowrap
+		max-width: 100%
+		align-items: center
+		li
+			a
+				display: inline-flex
+				border-bottom: 2px solid transparent
+				padding-bottom: r(24px)
+				font-weight: 500
+				@extend .body-3
+				+trans-all
+				text-transform: uppercase
+			&.active,&:hover,&.current-menu-item
+				a
+					+text(primary-3)
+					border-color: color(primary-3)
+.tabnav
+	border-bottom: 1px solid color(secondary-100)
+	ul
+		display: inline-flex
+		gap: r(40px)
+		overflow-x: auto
+		white-space: nowrap
+		max-width: 100%
+		align-items: center
+		li
+			a
+				display: inline-flex
+				border-bottom: 2px solid transparent
+				padding-bottom: r(12px)
+				font-weight: 700
+				@extend .body-1
+				+trans-all
+			&.active,&:hover,&.current-menu-item
+				a
+					+text(primary-3)
+					border-color: color(primary-3)

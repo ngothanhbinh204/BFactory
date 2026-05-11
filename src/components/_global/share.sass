@@ -1,0 +1,24 @@
+.detail-social
+	position: absolute
+	right: 100%
+	margin-right: r(32px)
+	top: 0
+	height: 100%
+	ul
+		position: sticky
+		top: calc(var(--header-height) + #{r(32px)})
+		+vstack(16px)
+
+.social-list
+	ul
+		li
+			a
+				+circle(32px)
+				+bg(white)
+				border: 1px solid color(primary-1)
+				+trans-all
+				+fz(14px)
+				&:hover,&.copied
+					+bg(primary-4)
+					+text(primary-2)
+					border-color: color(primary-4)

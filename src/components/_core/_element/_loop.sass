@@ -1,0 +1,42 @@
+
+@mixin color-modifiers($attribute: 'color', $prefix: '-')
+	@each $name, $hex in $colors
+		&#{$prefix}#{$name}
+			#{$attribute}: $hex
+
+@mixin background-modifiers($attribute: 'background-color', $prefix: '-')
+	@each $name, $hex in $colors
+		&#{$prefix}#{$name}
+			#{$attribute}: $hex
+
+@mixin gradient-modifiers($attribute: 'background-image', $prefix: '-')
+	@each $name, $value in $gradients
+		&#{$prefix}#{$name}
+			#{$attribute}: $value
+
+@mixin border-modifiers($attribute: 'border-color', $prefix: '-')
+	@each $name, $hex in $colors
+		&#{$prefix}#{$name}
+			#{$attribute}: $hex
+
+.text
+	@include color-modifiers($prefix: '-')
+
+.bg
+	@include background-modifiers($prefix: '-')
+
+.gradient
+	@include gradient-modifiers($prefix: '-')
+
+.border
+	@include border-modifiers($prefix: '-')
+
+@for $i from 1 through 6
+	.clamp-#{$i}
+		+line($i)
+
+@each $breakpoint, $value in $breakpoints
+	@media (min-width: $value)
+		@for $i from 1 through 6
+			.clamp-#{$breakpoint}-#{$i}
+				+line($i)

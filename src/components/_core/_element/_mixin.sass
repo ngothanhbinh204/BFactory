@@ -1,0 +1,405 @@
+@function r($size)
+	@return ($size/19.2px)*1rem
+
+@function color($color)
+	@return map-get($colors, $color)
+
+@function gradient($gradient)
+	@return map-get($gradients, $gradient)
+
+/* Escape to Parent -------------------------*/
+=esc-parent($selector: null)
+	@at-root #{$selector}#{&}
+		@content
+
+/* Context -------------------------*/
+=context($old-context, $new-context)
+	@at-root #{selector-replace(&, $old-context, $new-context)}
+		@content
+
+/* Abstract Extend -------------------------*/
+
+// all-transition
+=trans-all
+	transition: all 0.3s ease-in-out
+
+/* Forces GPU acceleration of the item, speeding up performance */
+=gpu-cache
+	backface-visibility: hidden
+	transform: translate3d(0,0,0)
+
+/* Cover Background */
+=cover-background
+	background-repeat: no-repeat
+	background-size: cover
+	background-position: center
+
+/* Flex Center Item */
+=flex-center
+	align-items: center
+	justify-content: center
+
+/* Block Center Item */
+=center-block
+	display: block
+	margin-left: auto
+	margin-right: auto
+
+/* Reset default style */
+=reset-link
+	text-decoration: none
+	&:hover,
+	&:focus,
+	&:active
+		text-decoration: none
+		outline: none
+
+=reset-button
+	padding: 0
+	border: none
+	font: inherit
+	color: inherit
+	background-color: transparent
+	cursor: pointer
+
+=all-text-inputs($pseudo: null)
+	$list: "hover", "focus", "active", "invalid", "required", "disabled"
+	@if not $pseudo
+		#{$list-of-text-inputs}
+			@content
+
+	@else if index($list, $pseudo)
+		$all-text-inputs: __pseudoSelector($list-of-text-inputs, $pseudo)
+		#{$all-text-inputs}
+			@content
+
+	@else
+		@error "The argument must be `null` or one of the followings: #{quote($list)}";
+
+=icon($content)
+	content: $content
+	font-family: 'Font Awesome 6 Pro'
+
+/* Text color -------------------------*/
+=text($color)
+	color: color($color)
+
+/* Text color opacity -------------------------*/
+=text-opa($color, $opacity)
+	color: rgba(color($color) , $opacity)
+
+/* Background color -------------------------*/
+=bg($color)
+	background-color: color($color)
+
+/* Background gradient -------------------------*/
+=bg-gra($color)
+	background-image: gradient($color)
+
+/* Background color opacity -------------------------*/
+=bg-opa($color, $opacity)
+	background-color: rgba(color($color) , $opacity)
+
+/* Background img -------------------------*/
+=bg-img-cover($url)
+	background-image: url($url)
+	@extend %cover-background
+
+/* Breakpoint -------------------------*/
+=mq-min($value)
+	$min: map-get($breakpoints, $value)
+	@media (min-width: $min + 1px)
+		@content
+
+=mq-max($value)
+	$max: map-get($breakpoints, $value)
+	@media (max-width: $max)
+		@content
+
+/* Pseudo -------------------------*/
+=pseudo($display: block, $pos: absolute, $content: '', $width: null, $height: null)
+	content: $content
+	display: $display
+	position: $pos
+	width: $width
+	height: $height
+
+/* Center Position -------------------------*/
+=center($position)
+	position: absolute
+	@if $position == 'Y'
+		top: 50%
+		transform: translateY(-50%)
+	@else if $position == 'X'
+		left: 50%
+		transform: translateX(-50%)
+	@else if $position == 'both'
+		top: 50%
+		left: 50%
+		transform: translate(-50%, -50%)
+
+/* Font size, line height rhythm -------------------------*/
+=fz($fontSize)
+	font-size: clamp(12px,r($fontSize), r($fontSize + 4px))
+
+=fz-lh($fontSize, $lineHeight)
+	font-size: r($fontSize)
+	line-height: $lineHeight / $fontSize
+	+mq-max(2xl)
+		font-size: clamp(12px,r($fontSize), r($fontSize + 4px))
+
+=fz-lh-14($fontSize, $lineHeight)
+	font-size: r($fontSize)
+	line-height: $lineHeight / $fontSize
+	+mq-max(2xl)
+		font-size: clamp(14px,r($fontSize), r($fontSize + 4px))
+
+=font($fontWeight, $fontSize, $lineHeight)
+	font-weight: $fontWeight
+	+fz-lh($fontSize, $lineHeight)
+
+/* Child element fill parent size -------------------------*/
+=fill
+	position: absolute
+	top: 0
+	bottom: 0
+	left: 0
+	right: 0
+	width: 100%
+	height: 100%
+
+/* Covering Mixin -------------------------*/
+
+=mask($height: 100%, $bg: null)
+	position: relative
+	&::after
+		+pseudo
+		+fill
+		height: $height
+		background: $bg
+		pointer-events: none
+
+/* Has Divider -------------------------*/
+=has-divider-top($gap, $color)
+	> * + *
+		margin-top: $gap
+		padding-top: $gap
+		border-top: 1px solid $color
+
+=has-divider-bottom($gap, $color)
+	margin-bottom: $gap
+	padding-bottom: $gap
+	border-bottom: 1px solid $color
+
+/* Content margins -------------------------*/
+=content-margins($selector: '> * + *')
+	@if not $selector
+		$selector: '&'
+	#{unquote($selector)}
+		@content
+
+/* Border Radius -------------------------*/
+=radius-custom($args...)
+	border-radius: $args
+	background-clip: padding-box
+
+=radius($radius)
+	border-radius: $radius
+	background-clip: padding-box
+
+=radius-top($radius)
+	border-top-right-radius: $radius
+	border-top-left-radius: $radius
+	background-clip: padding-box
+
+=radius-right($radius)
+	border-bottom-right-radius: $radius
+	border-top-right-radius: $radius
+	background-clip: padding-box
+
+=radius-bottom($radius)
+	border-bottom-right-radius: $radius
+	border-bottom-left-radius: $radius
+	background-clip: padding-box
+
+=radius-left($radius)
+	border-bottom-left-radius: $radius
+	border-top-left-radius: $radius
+	background-clip: padding-box
+
+/* TRBL -------------------------*/
+=trbl($top: null, $right: null, $bottom: null, $left: null)
+	@each $data in top $top, right $right, bottom $bottom, left $left
+		#{nth($data, 1)}: nth($data, 2)
+
+=top-left
+	@include trbl(0,null,null,0)
+
+=top-right
+	@include trbl(0,0)
+
+=bottom-left
+	@include trbl(null,null,0,0)
+
+=bottom-right
+	@include trbl(null,0,0,null)
+
+/* Border -------------------------*/
+=border($width: 1px, $style: solid, $color: null)
+	border: $width $style color($color)
+
+/* Line Clamp -------------------------*/
+=line($line)
+	overflow: hidden
+	display: -webkit-box
+	text-overflow: ellipsis
+	-webkit-line-clamp: $line
+	-webkit-box-orient: vertical
+
+/* Responsive Ratio -------------------------*/
+=res-ratio($x,$y, $pseudo: false)
+	$padding: unquote( ( $y / $x ) * 100 + '%' )
+	position: relative
+	@if $pseudo
+		&:before
+			+pseudo
+			width: 100%
+			padding-top: $padding
+	@else
+		padding-top: $padding
+	img,iframe,video
+		position: absolute
+		top: 0
+		left: 0
+		width: 100%
+		height: 100%
+		object-fit: cover
+
+/* Image Cover -------------------------*/
+=fit-cover
+	width: 100%
+	height: 100%
+	object-fit: cover
+
+/* Image Contain -------------------------*/
+=fit-contain
+	width: 100%
+	height: 100%
+	object-fit: contain
+
+/* Box size -------------------------*/
+=box($width, $height: $width)
+	width: r($width)
+	height: r($height)
+	display: flex
+	+flex-center
+
+/* Input placeholder -------------------------*/
+=placeholder
+	&::placeholder
+		@content
+
+/* Select background -------------------------*/
+=select-bg($bg: "../img/sl-bg.svg", $pos: calc(100% - 0.625rem))
+	background-image: url($bg)
+	background-repeat: no-repeat
+	background-position: $pos 50%
+	appearance: none
+
+/* Circle -------------------------*/
+=circle($width)
+	width: r($width)
+	height: r($width)
+	border-radius: 999999px
+	display: flex
+	+flex-center
+
+/* Scroll Bar -------------------------*/
+=scrollbars($size, $foreground-color, $background-color)
+	&::-webkit-scrollbar
+		width: $size
+		height: $size
+	&::-webkit-scrollbar-thumb
+		background: $foreground-color
+
+	&::-webkit-scrollbar-track
+		background: $background-color
+
+/* Hide -------------------------*/
+=hide($toggle: "hide")
+	@if $toggle == "hide"
+		position: absolute
+		width: 1px
+		height: 1px
+		padding: 0
+		border: 0
+		overflow: hidden
+		clip: rect(1px, 1px, 1px, 1px)
+		clip-path: inset(100%)
+		white-space: nowrap
+	@else if $toggle == "unhide"
+		position: static
+		width: auto
+		height: auto
+		overflow: visible
+		clip: auto
+		clip-path: none
+		white-space: inherit
+	@else if not index ("hide" "unhide", $toggle)
+		@error "#{$toggle} is not a valid value for the `$toggle` argument. The value must be either `hide` or `unhide`."
+
+/* Remove -------------------------*/
+=remove($value, $mode)
+	@if $mode == "min"
+		+mq-min($value)
+			display: none
+	@else if $mode == "max"
+		+mq-max($value)
+			display: none
+
+/* Disable hover on mobile -------------------------*/
+=on-hover
+	@media (hover: hover) and (pointer: fine)
+		&:hover
+			@content
+
+/* Calc -------------------------*/
+=calc($property, $expression)
+	#{$property}: -webkit-calc(#{$expression})
+	#{$property}: calc(#{$expression})
+
+/* Create Flex Row -------------------------*/
+=row($gap-x, $gap-y: $gap-x)
+	display: flex
+	flex-wrap: wrap
+	margin-left: r(-$gap-x / 2)
+	margin-right: r(-$gap-y / 2)
+	row-gap: r($gap-y)
+	> *
+		padding-left: r($gap-x / 2)
+		padding-right: r($gap-x / 2)
+
+/* Override Row -------------------------*/
+=gap-override($gap-x, $gap-y: $gap-x)
+	margin-left: r(-$gap-x / 2)
+	margin-right: r(-$gap-y / 2)
+	row-gap: r($gap-y)
+	> *
+		padding-left: r($gap-x / 2)
+		padding-right: r($gap-x / 2)
+/* Flex width -------------------------*/
+=flex-width($width)
+	max-width: $width
+	flex: 0 0 $width
+	width: 100%
+
+/* Create Flex Gap -------------------------*/
+
+=hstack($gap)
+	display: flex
+	gap: r($gap)
+
+=vstack($gap)
+	display: flex
+	flex-direction: column
+	gap: r($gap)

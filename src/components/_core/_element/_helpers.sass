@@ -1,0 +1,44 @@
+.icon-link
+	display: inline-flex
+	align-items: center
+	gap: 0.5rem
+	text-underline-offset: 0.25rem
+	backface-visibility: hidden
+
+.h-relative
+	+mq-min(lg)
+		position: absolute
+		top: 0
+		left: 0
+		width: 100%
+		height: 100%
+		overflow: auto
+
+.visually-hidden
+	position: absolute
+	width: 1px
+	height: 1px
+	padding: 0
+	margin: -1px
+	overflow: hidden
+	clip: rect(0, 0, 0, 0)
+	border: 0
+
+.stretched-link
+	&::after
+		position: absolute
+		top: 0
+		right: 0
+		bottom: 0
+		left: 0
+		z-index: 5
+		content: ""
+
+.background-cover
+	background-size: cover
+	background-position: center
+	background-repeat: no-repeat
+
+.has-scrollbar
+	overflow: auto
+	+scrollbars(4px, color(primary-1), color(gray-200))

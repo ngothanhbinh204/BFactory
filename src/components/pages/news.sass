@@ -1,0 +1,29 @@
+.news-item
+	position: relative
+	@extend .img-zoom-out
+	.news-item-title
+		+text(primary-4)
+		+trans-all
+	.news-item-image
+		figure
+			overflow: hidden
+	&-small
+		.news-item-image
+			figure
+				+res-ratio(320, 180)
+	&-big
+		display: grid
+		grid-template-columns: repeat(9,minmax(0,1fr))
+		+bg(gray-100)
+		+mq-max(md)
+			grid-template-columns: repeat(1,minmax(0,1fr))
+		.news-item-image
+			grid-column: span 6/span 6
+			figure
+				+res-ratio(680, 410)
+		.news-item-caption
+			grid-column: span 3/span 3
+			padding: r(24px)
+	+on-hover
+		.news-item-title
+			+text(primary-3)

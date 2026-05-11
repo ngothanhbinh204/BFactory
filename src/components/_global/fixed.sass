@@ -1,0 +1,27 @@
+.fixed-stuff
+	position: fixed
+	z-index: 50
+	bottom: r(50px)
+	right: 0
+	ul
+		li
+			& + li
+				margin-top: r(8px)
+			a
+				+flex-center
+				+reset-link
+				display: inline-flex
+				+circle(50px)
+				transition: 0.3s all
+				+bg(primary-1)
+				overflow: hidden
+				img
+					max-width: r(50px)
+				&.has-icon
+					font-size: r(20px)
+					+bg(white)
+					+text(primary-2)
+					box-shadow: 0 0 r(8px) r(4px) rgba(0, 0, 0, 0.10)
+				+on-hover
+					+bg(primary-1)
+					+text(white)

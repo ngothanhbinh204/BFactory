@@ -1,0 +1,33 @@
+.pager,.woocommerce-pagination,.facetwp-pager
+	margin-top: r(40px)
+
+.pagination,.facetwp-pager
+	+hstack(24px)
+	justify-content: center
+	li
+		list-style: none
+		display: inline-block
+		text-align: center
+	a,span
+		justify-content: center
+		align-items: center
+		display: flex
+		font-size: r(16px)
+		font-weight: 500
+		+box(44px)
+		+trans-all
+		+text(primary-4)
+		border: 1px solid color(primary-4)
+		cursor: pointer
+		&.active,&:hover
+			+bg(primary-3)
+			+text(primary-2)
+			border-color: color(primary-3)
+
+.no-pagination
+	.pages
+		display: none
+
+.sidebar-col
+	.woocommerce-pagination
+		display: none !important

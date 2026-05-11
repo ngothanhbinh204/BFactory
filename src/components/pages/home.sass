@@ -1,0 +1,83 @@
+.home-banner-slider
+	position: relative
+	.banner-item
+		position: relative
+		.banner-item-content
+			position: absolute
+			+center(Y)
+			left: 0
+			width: 100%
+			+mq-max(lg)
+				transform: none
+				top: r(160px)
+		.banner-item-image
+			figure
+				+res-ratio(1920, 960)
+				+mq-max(lg)
+					+res-ratio(1280, 2700)
+	.swiper-navigation
+		position: absolute
+		+center(Y)
+		width: 100%
+		left: 0
+		padding: 0 r(40px)
+		display: flex
+		justify-content: space-between
+		z-index: 2
+		pointer-events: none
+		.swiper-btn
+			pointer-events: auto
+			background: transparent
+			+on-hover
+				+bg(primary-4)
+
+.section-home-2
+	+mq-min(lg)
+		padding: r(126px) 0 r(80px) !important
+
+.section-home-3
+	.image
+		figure
+			+res-ratio(1920, 650)
+	.swiper-navigation
+		position: absolute
+		+center(Y)
+		width: 100%
+		left: 0
+		padding: 0 r(40px)
+		display: flex
+		justify-content: space-between
+		z-index: 2
+		pointer-events: none
+		.swiper-btn
+			pointer-events: auto
+			background: transparent
+			border: 1px solid #fff
+			color: #fff
+			+on-hover
+				+bg(primary-4)
+				color: #fff
+
+.section-home-5
+	position: relative
+	+mq-min(lg)
+		min-height: r(648px)
+	.image-container
+		+bg(primary-2)
+		+mq-max(lg)
+			margin-top: r(40px)
+		+mq-min(lg)
+			position: absolute
+			top: 0
+			right: 0
+			width: 50%
+			height: 100%
+		.image
+			height: 100%
+		figure
+			+res-ratio(960, 648)
+	.form-consultation
+		.row
+			+gap-override(24px)
+		+all-text-inputs
+			+text(primary-2)

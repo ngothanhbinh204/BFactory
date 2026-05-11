@@ -1,0 +1,107 @@
+.section-about-1
+	position: relative
+	z-index: 2
+	.image
+		figure
+			+res-ratio(1400, 520)
+	.expand-content
+		max-height: r(240px)
+		overflow: hidden
+		+trans-all
+		&.expanded
+			max-height: var(--original-content-height) !important
+
+.section-about-2
+	position: relative
+	padding: r(40px) 0 0
+	+mq-min(lg)
+		min-height: r(998px)
+		padding: r(240px) 0 r(272px)
+		margin-top: r(-240px)
+	.image
+		+mq-max(lg)
+			margin-top: r(40px)
+		+mq-min(lg)
+			position: absolute
+			bottom: 0
+			right: 0
+			width: 910 / 1920 * 100%
+			img
+				width: 100%
+				height: 100%
+				object-fit: cover
+
+.section-about-3
+	.swiper-navigation
+		position: absolute
+		bottom: 0
+		right: 0
+		width: 920 / 1400 * 100%
+		padding: r(40px)
+	.factory-item
+		display: grid
+		grid-template-columns: 1fr calc(920 / 1400 * 100%)
+		+bg(primary-1)
+		+text(primary-2)
+		+mq-max(lg)
+			grid-template-columns: 1fr
+		.factory-item-image
+			position: relative
+			figure
+				+res-ratio(920, 614)
+
+		.factory-item-content
+			padding: r(80px) r(40px) r(40px)
+		.factory-item-area
+			font-size: r(74px)
+			font-weight: 700
+			span
+				font-size: r(32px)
+				sup
+					font-size: 70%
+					vertical-align: super
+
+.section-about-4
+	+mq-min(lg)
+		padding: r(80px) 0 r(190px) !important
+.catalogue-slider
+	.swiper-wrapper
+		align-items: center
+	.swiper-slide
+		+trans-all
+		.catalogue-item
+			+trans-all
+			.catalogue-item-title
+				+trans-all
+				opacity: 0
+			.catalogue-item-image
+				figure
+					+res-ratio(320, 454)
+					border-radius: r(20px)
+					overflow: hidden
+					border: r(16px) solid transparent
+					+trans-all
+					img
+						+trans-all
+						opacity: 0.5
+		&-active
+			+mq-min(lg)
+				width: r(320px) !important
+			.catalogue-item
+				padding: 0
+				.catalogue-item-title
+					opacity: 1
+				.catalogue-item-image
+					figure
+						border-color: color(primary-4)
+						img
+							opacity: 1
+
+.catalogue-sidebar-list
+	li
+		a
+			@extend .body-1
+		& + li
+			margin-top: r(16px)
+			padding-top: r(16px)
+			border-top: r(1px) solid color(secondary-300)

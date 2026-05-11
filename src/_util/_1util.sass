@@ -1,0 +1,96 @@
+$breakpoints: (sm: 576.98px,md: 768.98px,lg: 1024.98px,xl: 1280.98px,2xl: 1440.98px,3xl: 1600.98px) !default
+
+$shadow: (light: 4px 4px 24px 0px rgba(0, 0, 0, 0.12), medium: 4px 8px 8px 4px #000000, hard: 0px 10px 10px #000000)
+
+$position-values: (0: 0,50: 50%,100: 100%) !default
+
+$opacity-values: (0: 0, 10: 0.1, 20: 0.2, 30: 0.3, 40: 0.4, 50: 0.5, 60: 0.6, 70: 0.7, 80: 0.8, 90: 0.9, 100: 1) !default
+
+$zIndex-values: (0:0, 1: 1, 2:2, 3:3, "menu": 99, "backdrop": 100)
+
+$sizingValue: (0: 0, 100: 100%, "max": max-content, "min": min-content, "fit": "fit-content")
+
+$borderStyle: (solid: solid, dashed: dashed, none: none)
+
+$utilities: ("overflow": (property: overflow, values: auto hidden visible scroll), "display": (property: display, values: none block inline-block inline inline-flex flex, class: "d"), "text-align": (property: text-align, values: left center right justify, class: text), "flex-direction": (property: flex-direction, values: row column row-reverse column-reverse, class: flex), "flex-wrap": (property: flex-wrap, values: nowrap wrap wrap-reverse, class: flex), "justify-content": (property: justify-content, values: (start: flex-start,end: flex-end,center: center,between: space-between,around: space-around,evenly: space-evenly), class: justify), "align-items": (property: align-items, values: (start: flex-start, end: flex-end, center: center, baseline: baseline, stretch: stretch), class: items), "order": (property: order, values: (first: -1, 1: 1, 2:2, 3:3, 4:4, 5:5, last:6), class: order), "position": (property: position, values: relative absolute fixed sticky, class: position), "text-transform": (property: text-transform, values: uppercase lowercase capitalize, class: text), "white-space": (property: white-space, values: (wrap: normal, nowrap: nowrap), class: text), "pointer-events": (property: pointer-events, values: none auto, class: pointer), "cursor": (property: cursor,class: cursor,values: auto pointer grab), "font-weight": (property: font-weight, values: (light: 300, normal: 400, medium: 500, semibold: 600, bold: 700, extra-bold: 800, black: 900), class: font), "margin-x": (property: margin-left margin-right, values: (auto: auto), class: mx), "margin-y": (property: margin-top margin-bottom, values: (auto: auto), class: my), "margin-top": (property: margin-top, values: (auto: auto), class: mt), "margin-bottom": (property: margin-bottom, values: (auto: auto), class: mb), "margin-right": (property: margin-right, values: (auto: auto), class: mr), "margin-left": (property: margin-left, values: (auto: auto), class: ml), "top": (property: top, values: $position-values, class: top), "left": (property: left, values: $position-values, class: left), "bottom": (property: bottom, values: $position-values, class: bottom), "right": (property: right, values: $position-values, class: right), "box-shadow": (property: box-shadow, values: $shadow, class: shadow), "height": (property: height, values: $sizingValue, class: h), "width": (property: width, values: $sizingValue, class: w), "opacity": (property: opacity, values: $opacity-values, class: opacity), "z-index": (property: z-index, values: $zIndex-values, class: z), "object-fit": ( property: object-fit, values: ( contain: contain, cover: cover, none: none), class: object), "font-style": ( property: font-style, class: fst, values: italic normal), "text-decoration": (property: text-decoration,values: none underline line-through,class: text), "rounded": (property: border-radius, class: rounded, values: (0: 0, circle: 50%, pill:50rem)), "col": (property: flex, class: col, values: (auto: 1 0 0%)),"max-width": (property: max-width,class: max-w,values: $sizingValue),"border-style": (property: border-style, class: border,values: $borderStyle))
+
+// Generate utility classes
+@each $utility-name, $utility-settings in $utilities
+	$property: map-get($utility-settings, property)
+	$values: map-get($utility-settings, values)
+	$class: if(map-has-key($utility-settings, class), map-get($utility-settings, class), $utility-name)
+
+	@if type-of($values) == "list"
+		@each $value in $values
+			// Default classes (no breakpoint prefix)
+			.#{$class}-#{$value}
+				@each $prop in $property
+					#{$prop}: #{$value}
+
+	@else if type-of($values) == "map"
+		@each $key, $value in $values
+			// Default classes (no breakpoint prefix)
+			.#{$class}-#{$key}
+				@each $prop in $property
+					#{$prop}: #{$value}
+
+// Generate responsive utility classes
+@each $breakpoint, $breakpoint-size in $breakpoints
+	@each $utility-name, $utility-settings in $utilities
+		$property: map-get($utility-settings, property)
+		$values: map-get($utility-settings, values)
+		$class: if(map-has-key($utility-settings, class), map-get($utility-settings, class), $utility-name)
+
+		@if type-of($values) == "list"
+			@each $value in $values
+				// Responsive classes
+				@media (min-width: #{$breakpoint-size})
+					.#{$class}-#{$breakpoint}-#{$value}
+						@each $prop in $property
+							#{$prop}: #{$value}
+
+		@else if type-of($values) == "map"
+			@each $key, $value in $values
+				// Responsive classes
+				@media (min-width: #{$breakpoint-size})
+					.#{$class}-#{$breakpoint}-#{$key}
+						@each $prop in $property
+							#{$prop}: #{$value}
+
+@for $i from 1 through 6
+	.clamp-#{$i}
+		overflow: hidden
+		display: -webkit-box
+		text-overflow: ellipsis
+		-webkit-line-clamp: $i
+		-webkit-box-orient: vertical
+
+@each $breakpoint, $value in $breakpoints
+	@media (min-width: $value)
+		@for $i from 1 through 5
+			.clamp-#{$breakpoint}-#{$i}
+				overflow: hidden
+				display: -webkit-box
+				-webkit-box-orient: vertical
+				-webkit-line-clamp: $i
+
+@for $i from 1 through 12
+	.w-#{$i}
+		width: #{($i / 12) * 100%}
+
+@each $breakpoint, $value in $breakpoints
+	@media (min-width: $value)
+		@for $i from 1 through 12
+			.w-#{$breakpoint}-#{$i}
+				width: #{($i / 12) * 100%}
+
+/* Breakpoint -------------------------*/
+=mq-min($value)
+	$min: map-get($breakpoints, $value)
+	@media (min-width: $min + 1px)
+		@content
+
+=mq-max($value)
+	$max: map-get($breakpoints, $value)
+	@media (max-width: $max)
+		@content

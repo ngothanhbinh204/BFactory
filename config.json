@@ -1,0 +1,19 @@
+{
+	"font": ["src/fonts/**"],
+	"js": [
+		"node_modules/jquery/dist/jquery.js",
+		"src/_plugins/lazyload/lazyload.js",
+		"src/_plugins/mapping.js",
+		"src/_plugins/mapping-listener.js",
+		"src/_plugins/jquery.sticky.js",
+		"src/_plugins/jquery.matchHeight.js",
+		"src/_plugins/jquery.tabslet.js",
+		"node_modules/swiper/swiper-bundle.js"
+	],
+	"css": [
+		"src/_plugins/fonts.css",
+		"src/_plugins/fontawesome.css",
+		"node_modules/swiper/swiper-bundle.css",
+		"node_modules/@fancyapps/ui/dist/fancybox/fancybox.css"
+	]
+}
