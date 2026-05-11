@@ -1,0 +1,19 @@
+.account-nav
+	box-shadow: 8px 8px 32px 16px rgba(0, 0, 0, 0.04)
+	ul
+		> li
+			> a
+				display: block
+				padding: r(16px)
+				@extend .body-2
+			& + li
+				border-top: 1px solid color(gray-100)
+				> a
+					+trans-all
+			&.active,&[class*="current_"],&.is-active
+				> a
+					+bg(primary-4)
+					+text(primary-2)
+
+label
+	font-weight: 700

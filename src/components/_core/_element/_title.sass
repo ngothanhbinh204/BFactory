@@ -35,19 +35,21 @@
 .body-5
 	+fz-lh(12px, 16px)
 
-.section-title
-	position: relative
-	padding-top: r(24px)
-	&:before
-		background: linear-gradient( to right, #233f87, #233f87 50%, #ed1c24 50%, #ed1c24 )
-		position: absolute
-		content: ""
-		top: 0
-		left: 0
-		right: 0
-		width: r(120px)
-		height: r(6px)
-	&.text-center
-		&:before
-			left: 50%
-			transform: translateX(-50%)
+// .section-title
+// 	position: relative
+// 	padding-top: r(24px)
+// 	&:before
+// 		background: linear-gradient( to right, #233f87, #233f87 50%, #ed1c24 50%, #ed1c24 )
+// 		position: absolute
+// 		content: ""
+// 		top: 0
+// 		left: 0
+// 		right: 0
+// 		width: r(120px)
+// 		height: r(6px)
+// 	&.text-center
+// 		&:before
+// 			left: 50%
+// 			transform: translateX(-50%)
+[class*="border"]
+    border-style: solid !important

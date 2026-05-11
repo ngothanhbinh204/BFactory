@@ -1,39 +1,42 @@
 <?php
 
-
-
 $object = get_queried_object();
-$id_category = $object->term_id;
-$taxonomy = $object->taxonomy;
-if ($id_category) {
-	$id = $taxonomy . '_' . $id_category;
-} else {
-	$id = get_the_ID();
-}
-$banner = get_field('banner_select_page', $id);
-// if object is any taxonomy, get the name of the taxonomy
-if (isset($object->taxonomy)) {
+
+$id = null;
+$title = '';
+
+if ($object instanceof WP_Term) {
+
+	$id = $object->taxonomy . '_' . $object->term_id;
 	$title = $object->name;
-} else {
+
+} elseif (is_shop()) {
+
+	$shop_id = wc_get_page_id('shop');
+
+	$id = $shop_id;
+	$title = get_the_title($shop_id);
+
+} elseif (is_singular()) {
+
+	$id = get_the_ID();
 	$title = get_the_title();
+
 }
+
+$banner = get_field('banner_select_page', $id);
+
 ?>
 <?php if ($banner) : ?>
-	<section class="section-sub-banner">
-		<?php foreach ($banner as $item) : ?>
-			<div class="sub-banner-item">
-				<div class=" sub-banner-item-image">
-					<?php echo post_thumbnail($item->ID, "w-100") ?>
-				</div>
-			</div>
-		<?php endforeach; ?>
-		<div class="page-title-wrapper">
-			<div class="container">
-				<h1 class="heading-xlarge text-primary-2 text-center font-black text-uppercase mb-6"><?= $title ?></h1>
-			</div>
-			<?php get_template_part("./modules/common/breadcrumb") ?>
+	<section class="page-banner-main">
+		<div class="img img-ratio pt-[calc(656/1920*100rem)]">
+			<?php foreach ($banner as $item) : ?>
+				<?php echo post_thumbnail($item->ID, "w-100") ?>
+			<?php endforeach; ?>
 		</div>
 	</section>
+	<?php get_template_part("./modules/common/breadcrumb") ?>
 <?php else : ?>
 	<?php get_template_part("./modules/common/breadcrumb") ?>
 <?php endif; ?>
+

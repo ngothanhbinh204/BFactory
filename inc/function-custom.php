@@ -171,3 +171,46 @@ add_filter('facetwp_facet_html', function ($output, $params) {
 
 	return $output;
 }, 10, 2);
+
+function bfactory_get_dual_price_html($product) {
+    $price_html = '';
+    $exchange_rate = get_field('usd_exchange_rate', 'option');
+    if (!$exchange_rate) $exchange_rate = 25000;
+    
+    $price = $product->get_price();
+    $regular_price = $product->get_regular_price();
+    $sale_price = $product->get_sale_price();
+    
+    if ('' === $price) return '';
+
+    if ($product->is_on_sale() && $regular_price) {
+        $price_vnd = strip_tags(wc_price($sale_price));
+        $price_usd = round((float)$sale_price / $exchange_rate, 2) . '$';
+        
+        $old_price_vnd = strip_tags(wc_price($regular_price));
+        $old_price_usd = round((float)$regular_price / $exchange_rate, 2) . '$';
+
+        $price_html = '
+            <div class="span price-current">
+                <span class="price-current-vnd">' . $price_vnd . '</span> - 
+                <span class="price-current-usd">' . $price_usd . '</span>
+            </div>
+            <span class="price-old">
+                <span class="price-old-vnd">' . $old_price_vnd . '</span> - 
+                <span class="price-old-usd">' . $old_price_usd . '</span>
+            </span>
+        ';
+    } else {
+        $price_vnd = strip_tags(wc_price($price));
+        $price_usd = round((float)$price / $exchange_rate, 2) . '$';
+
+        $price_html = '
+            <div class="span price-current">
+                <span class="price-current-vnd">' . $price_vnd . '</span> - 
+                <span class="price-current-usd">' . $price_usd . '</span>
+            </div>
+        ';
+    }
+
+    return '<div class="product-item__price">' . $price_html . '</div>';
+}

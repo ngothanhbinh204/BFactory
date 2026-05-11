@@ -33,40 +33,40 @@ if (isset($args["no-price"]) && $args["no-price"]) {
 	$no_price = true;
 }
 ?>
-<div class="product-item">
-	<a class="product-item-image-wrapper" href="<?= get_the_permalink($product->get_id()) ?>">
-		<?php if ($product->is_on_sale()) : ?>
-			<div class="product-item-percentage">
-				<?php echo get_product_discount_percentage($product) ?>
-			</div>
-		<?php endif; ?>
-		<div class="product-item-image">
-			<figure>
-				<?= post_thumbnail($product->get_id(), 'full') ?>
-			</figure>
-		</div>
-		<div class="product-item-shadow">
-			<img src="<?= get_template_directory_uri() ?>/img/shadow.svg" alt="">
+<article class="product-item">
+	<a class="product-item__thumb" href="<?= get_the_permalink($product->get_id()) ?>">
+		<div class="product-item__img img-ratio ratio:pt-[1_1]">
+            <img class="lozad" data-src="<?= get_the_post_thumbnail_url($product->get_id(), 'full') ?>" alt="<?= esc_attr($product->get_name()) ?>" />
 		</div>
 	</a>
-	<div class="product-item-content text-center mt-5">
-		<h3 class="product-item-title body-3 text-uppercase mb-2">
-			<a href="<?= get_the_permalink($product->get_id()) ?>">
-				<?php echo $product->get_name() ?>
-			</a>
-		</h3>
-		<?php if (!$no_price) : ?>
-			<div class="product-item-price">
-				<?php if ($product->get_price() == 0) : ?>
-					<span class="body-1 font-bold text-primary-4 ">
-						<?php _e('Liên hệ', 'canhcamtheme') ?>
-					</span>
-				<?php else : ?>
-					<?php echo $product->get_price_html() ?>
-				<?php endif; ?>
+	<div class="product-item__body">
+		<div class="summary">
+            <a class="product-item__name" href="<?= get_the_permalink($product->get_id()) ?>">
+                <?= $product->get_name() ?>
+            </a>
+			<div class="product-item__badges">
+                <?php if ($product->is_on_sale()) : ?>
+                <span class="badge-discount"><?php echo get_product_discount_percentage($product) ?></span>
+                <?php endif; ?>
+                <?php if ($product->is_featured()) : ?>
+                <span class="badge-bestseller">bestseller</span>
+                <?php endif; ?>
 			</div>
-		<?php endif; ?>
+            <?php if (!$no_price) : ?>
+                <?= bfactory_get_dual_price_html($product) ?>
+            <?php endif; ?>
+		</div>
+		<ul class="product-item__specs">
+            <?php 
+            $manufacturer = get_field('product_manufacturer', $product->get_id()) ?: 'Vingroup';
+            $origin = get_field('product_origin', $product->get_id()) ?: 'Made in Viet Nam';
+            $sku = $product->get_sku() ?: 'N/A';
+            ?>
+			<li><i class="fa-solid fa-check"></i><span>Nhà sản xuất: <?= esc_html($manufacturer) ?></span></li>
+			<li><i class="fa-solid fa-check"></i><span>Mã sản phẩm: <?= esc_html($sku) ?></span></li>
+			<li><i class="fa-solid fa-check"></i><span><?= esc_html($origin) ?></span></li>
+		</ul>
 	</div>
-</div>
+</article>
 <!-- do_action('woocommerce_after_shop_loop_item_title'); -->
 <!-- do_action('woocommerce_after_shop_loop_item'); -->

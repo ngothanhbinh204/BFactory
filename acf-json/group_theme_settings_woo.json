@@ -1,0 +1,43 @@
+{
+    "key": "group_theme_settings_woo",
+    "title": "WooCommerce Settings",
+    "fields": [
+        {
+            "key": "field_usd_exchange_rate",
+            "label": "Tỷ giá USD (VND)",
+            "name": "usd_exchange_rate",
+            "type": "number",
+            "instructions": "Nhập tỷ giá quy đổi 1 USD = ? VND (Ví dụ: 25000)",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 25000,
+            "min": "",
+            "max": "",
+            "step": "",
+            "prepend": "",
+            "append": "VNĐ"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "theme-general-settings"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": ""
+}

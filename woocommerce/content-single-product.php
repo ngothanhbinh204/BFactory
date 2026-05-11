@@ -34,11 +34,8 @@ if (post_password_required()) {
 ?>
 
 <?php
-$product_gallery = get_field("product_gallery", $product->get_id());
-$product_technical_stat = get_field("product_technical_stat", $product->get_id());
-$product_tab = get_field("product_tab", $product->get_id());
-$faq_list = get_field("faq_list", $product->get_id());
-$related_products = get_field("related_products", $product->get_id());
+$product_advantages = get_field("product_advantages", $product->get_id());
+$video_guide_list = get_field("video_guide_list", $product->get_id());
 
 $productOtherQuery = new WP_Query(array(
 	"post_type" => "product",
@@ -57,280 +54,150 @@ $productOtherQuery = new WP_Query(array(
 ?>
 
 
-<section <?php wc_product_class('section-large ', $product); ?>>
+<section class="section-product-detail">
 	<div class="container">
-		<div class="row">
-			<div class="col-lg-7">
-				<?php if ($product_gallery) : ?>
-					<div class="product-image-slider-wrap">
-						<div class="product-detail-thumbnail position-relative">
-							<div class="swiper">
-								<div class="swiper-wrapper">
-									<?php foreach ($product_gallery as $item) : ?>
-										<?php
-										$video_url = $item["video_url"];
-										?>
-										<div class="swiper-slide">
-											<figure class="<?php echo $video_url ? "has-video" : "" ?>">
-												<?php echo field_image($item["image"], "full") ?>
-												<?php if ($video_url) : ?>
-													<div class="icon-play">
-														<i class="fas fa-play"></i>
-													</div>
-												<?php endif; ?>
-											</figure>
-										</div>
-									<?php endforeach; ?>
+		<div class="product-detail-layout">
+			<div class="product-gallery woocommerce-product-gallery">
+				<div class="product-gallery__top">
+					<div class="product-gallery__thumbs swiper" data-gallery-thumbs>
+						<div class="swiper-wrapper">
+                            <?php 
+                            $attachment_ids = $product->get_gallery_image_ids();
+                            $featured_id = $product->get_image_id();
+                            $all_images = array_merge(array($featured_id), $attachment_ids);
+                            foreach($all_images as $img_id): 
+                                if(!$img_id) continue;
+                                $img_url = wp_get_attachment_image_url($img_id, 'medium');
+                            ?>
+							<div class="swiper-slide">
+								<div class="product-thumb">
+									<div class="img-ratio ratio:pt-[1_1]"><img class="lozad" data-src="<?= esc_url($img_url) ?>" alt="" /></div>
 								</div>
 							</div>
+                            <?php endforeach; ?>
 						</div>
-						<div class="product-detail-images">
-							<div class="swiper">
-								<div class="swiper-wrapper">
-									<?php foreach ($product_gallery as $item) : ?>
-										<?php
-										$video_url = $item["video_url"];
-										$format_youtube_url = convert_youtube_url_to_embed($video_url);
-										?>
-										<div class="swiper-slide">
-											<figure class="<?php echo $video_url ? "has-video" : "" ?>">
-												<?php if ($video_url) : ?>
-													<iframe src="<?php echo $format_youtube_url ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-												<?php else : ?>
-													<?php echo field_image($item["image"], "full") ?>
-												<?php endif; ?>
-											</figure>
-										</div>
-									<?php endforeach; ?>
-								</div>
+					</div>
+					<div class="product-gallery__slider-frame">
+						<div class="product-gallery__slider swiper" data-gallery-main>
+							<div class="swiper-wrapper">
+                                <?php 
+                                foreach($all_images as $img_id): 
+                                    if(!$img_id) continue;
+                                    $img_full = wp_get_attachment_image_url($img_id, 'full');
+                                ?>
+								<div class="swiper-slide">
+                                    <a class="gallery-slide-link" href="<?= esc_url($img_full) ?>" data-fancybox="product-gallery" aria-label="Xem ảnh lớn">
+										<div class="img-ratio ratio:pt-[1_1]"><img class="lozad" data-src="<?= esc_url($img_full) ?>" alt="" /></div>
+									</a>
+                                </div>
+                                <?php endforeach; ?>
 							</div>
-							<div class="swiper-navigation d-flex gap-6">
-								<div class="swiper-btn swiper-btn-prev">
-									<i class="far fa-arrow-left"></i>
-								</div>
-								<div class="swiper-btn swiper-btn-next">
-									<i class="far fa-arrow-right"></i>
-								</div>
+							<div class="wrapper-controll">
+								<button class="btn btn-slide btn-swiper-prev btn-product-prev btn-slide-inner btn-slide"><i class="fa-regular fa-angle-left"></i></button>
+								<button class="btn btn-slide btn-swiper-next btn-product-next btn-slide-inner btn-slide"><i class="fa-regular fa-angle-right"></i></button>
 							</div>
 						</div>
 					</div>
-				<?php endif; ?>
+				</div>
 			</div>
-			<div class="col-lg-5">
-				<h1 class="heading-4 font-bold text-uppercase">
-					<?php echo $product->get_name() ?>
-				</h1>
-				<div class="body-3 font-medium text-secondary-500 mt-4">
-					<?php echo $product->get_short_description() ?>
+			<div class="product-detail-info entry-summary">
+				<h1 class="product_title entry-title"><?= $product->get_name() ?></h1>
+				<div class="product-detail-badges">
+                    <?php if ($product->is_on_sale()) : ?>
+                    <span class="badge-discount"><?php echo get_product_discount_percentage($product) ?></span>
+                    <?php endif; ?>
+                    <?php if ($product->is_featured()) : ?>
+                    <span class="badge-bestseller">
+						<?php _e('bestseller', 'canhcamtheme') ?>
+					</span>
+                    <?php endif; ?>
+                </div>
+				
+                <div class="product-detail-price price">
+                    <?= bfactory_get_dual_price_html($product) ?>
+                </div>
+
+				<div class="divider"></div>
+				<div class="product-detail-desc woocommerce-product-details__short-description">
+					<?= apply_filters('the_content', $product->get_description()) ?>
 				</div>
-				<div class="body-2 mt-5 article-content">
-					<?php echo $product->get_description() ?>
-				</div>
-				<?php if ($product_technical_stat) : ?>
-					<div class="product-detail-stat mt-5">
-						<?php foreach ($product_technical_stat as $item) : ?>
-							<div class="stat-item">
-								<div class="title">
-									<?php echo $item["title"] ?>
-								</div>
-								<div class="value">
-									<?php echo $item["content"] ?>
-								</div>
-							</div>
-						<?php endforeach; ?>
-					</div>
-				<?php endif; ?>
-				<?php if ($product->get_price() != 0) : ?>
-					<div class="product-detail-price mt-5">
-						<?php if ($product->is_on_sale()) : ?>
-							<?php echo $product->get_price_html(); ?>
-							<div class="product-item-percentage">
-								<?php echo get_product_discount_percentage($product) ?>
-							</div>
-						<?php else : ?>
-							<div class="heading-5 font-bold text-primary-3">
-								<?php echo $product->get_price_html(); ?>
-							</div>
-						<?php endif; ?>
-					</div>
-				<?php endif; ?>
-				<div class="product-detail-action mt-6">
-					<?php do_action('woocommerce_single_product_summary'); ?>
-				</div>
-				<div class="product-detail-share mt-6 pt-5 border-t-1 border-solid border-secondary-200">
-					<div class="social-list d-flex items-center gap-6">
-						<div class="body-3">
-							<?= __("Theo dõi ngay:", "canhcamtheme") ?>
-						</div>
-						<ul class="hstack gap-3">
-							<li>
-								<a href="https://www.facebook.com/sharer/sharer.php?u=<?= get_the_permalink() ?>" target="_blank">
-									<span class="fab fa-facebook-f"></span>
-								</a>
-							</li>
-							<li>
-								<a href="javascript:void(0)" class="copy-link">
-									<span class="far fa-copy"></span>
-								</a>
-							</li>
+                
+                <?php if ($product_advantages) : ?>
+				<div class="product-advantages">
+					<div class="product-advantages__header">Ưu điểm</div>
+					<div class="product-advantages__body">
+						<ul>
+                            <?php foreach ($product_advantages as $item) : 
+								$advantage = $item['advantage'];
+							?>
+							<li><?= wp_kses_post($advantage) ?></li>
+                            <?php endforeach; ?>
 						</ul>
 					</div>
 				</div>
+                <?php endif; ?>
+                
+				<form class="cart product-actions" method="post" enctype='multipart/form-data'>
+					<button class="btn btn-primary-outline btn-add-to-cart add_to_cart_button" type="submit" name="add-to-cart" value="<?= esc_attr($product->get_id()); ?>">
+                        <span>Thêm vào giỏ hàng</span><i class="fa-regular fa-cart-shopping"></i>
+                    </button>
+                    <a class="btn btn-primary btn-buy-now" href="?add-to-cart=<?= esc_attr($product->get_id()); ?>&buy_now=1">
+                        <span>Mua ngay</span><i class="fa-regular fa-arrow-right"></i>
+                    </a>
+				</form>
 			</div>
 		</div>
-		<?php if ($product_tab || $faq_list) : ?>
-			<div class="product-detail-bottom">
-				<div class="row">
-					<div class="col-lg-9">
-						<div class="product-detail-tab tabnav" data-toggle="tab" data-target="#product-detail-tab">
-							<ul>
-								<?php if ($product_tab) : ?>
-									<?php foreach ($product_tab as $key => $item) : ?>
-										<li>
-											<a href="#tab-<?= $key + 1 ?>">
-												<?= $item["title"] ?>
-											</a>
-										</li>
-									<?php endforeach; ?>
-								<?php endif; ?>
-								<?php if ($faq_list) : ?>
-									<li>
-										<a href="#tab-faq">
-											<?= __("Q&A", "canhcamtheme") ?>
-										</a>
-									</li>
-								<?php endif; ?>
-							</ul>
-						</div>
-						<div id="product-detail-tab" class="mt-6">
-							<?php if ($product_tab) : ?>
-								<?php foreach ($product_tab as $key => $item) : ?>
-									<div class="tab-content p-lg-10 p-8 bg-secondary-50" id="tab-<?= $key + 1 ?>">
-										<div class="heading-5 font-bold mb-4">
-											<?= $item["title"] ?>
-										</div>
-										<div class="article-content body-2">
-											<?= $item["content"] ?>
-										</div>
-									</div>
-								<?php endforeach; ?>
-							<?php endif; ?>
-							<?php if ($faq_list) : ?>
-								<div class="tab-content p-lg-10 p-8 bg-secondary-50" id="tab-faq">
-									<div class="heading-5 font-bold mb-4">
-										<?= __("Q&A", "canhcamtheme") ?>
-									</div>
-									<div class="faq-list vstack gap-4 " data-toggle="accordion" data-active-index="0">
-										<?php foreach ($faq_list as $item) : ?>
-											<div class="accordion-item faq-item">
-												<div class="accordion-trigger d-flex items-start justify-between body-1 font-bold">
-													<div class="title">
-														<span class="text"><?= $item["title"] ?></span>
-													</div>
-													<div class="icon ">
-														<em class="far fa-plus"></em>
-													</div>
-												</div>
-												<div class="accordion-content">
-													<div class="body-2 article-content">
-														<?= $item["content"] ?>
-													</div>
-												</div>
-											</div>
-										<?php endforeach; ?>
-									</div>
-								</div>
-							<?php endif; ?>
-						</div>
-					</div>
-					<div class="col-lg-3">
-						<?php if ($related_products) : ?>
-							<div class="heading-5 font-bold mb-lg-10 mb-6">
-								<?= __("Có thể bạn quan tâm", "canhcamtheme") ?>
-							</div>
-							<div class="row equal-height related-products">
-								<?php foreach ($related_products as $id) : ?>
-									<div class="col-lg-12 col-6">
-										<?php get_template_part("./woocommerce/content", "product", array("productID" => $id, "no-price" => true)); ?>
-									</div>
-								<?php endforeach; ?>
-							</div>
-						<?php endif; ?>
-					</div>
-				</div>
-			</div>
-		<?php endif; ?>
 	</div>
 </section>
-
-<?php if ($productOtherQuery->have_posts()) : ?>
-	<section class="section-large bg-secondary-50">
-		<div class="container">
-			<div class="heading-4 font-bold mb-lg-10 mb-6 text-center ">
-				<?= __("Sản phẩm khác", "canhcamtheme") ?>
+		<?php if ($video_guide_list): ?>
+		<section class="section-video-guide">
+			<div class="container">
+				<h2 class="section-title h30"><strong>VIDEO</strong> HƯỚNG DẪN LẮP ĐẶT</h2>
 			</div>
-			<div class="quadruple-slider swiper-equal-height position-relative">
-				<div class="swiper">
+			<div class="video-guide-outer">
+				<div class="swiper swiper-video-guide">
 					<div class="swiper-wrapper">
-						<?php while ($productOtherQuery->have_posts()) : $productOtherQuery->the_post(); ?>
-							<div class="swiper-slide">
-								<?php wc_get_template_part("content", "product"); ?>
-							</div>
-						<?php endwhile; ?>
-						<?php wp_reset_postdata(); ?>
-					</div>
-				</div>
-				<div class="swiper-navigation is-between">
-					<div class="swiper-btn swiper-btn-prev">
-						<i class="far fa-arrow-left"></i>
-					</div>
-					<div class="swiper-btn swiper-btn-next">
-						<i class="far fa-arrow-right"></i>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-<?php endif; ?>
-
-<?php
-$viewed_product_ids = get_recently_viewed_product_ids(10);
-?>
-
-<?php if ($viewed_product_ids) : ?>
-	<section class="section-large">
-		<div class="container">
-			<div class="heading-4 font-bold mb-lg-10 mb-6 text-center">
-				<?= __("Sản phẩm đã xem", "canhcamtheme") ?>
-			</div>
-			<div class="quadruple-slider position-relative  swiper-equal-height">
-				<div class="swiper">
-					<div class="swiper-wrapper">
-						<?php foreach ($viewed_product_ids as $id) : ?>
-							<div class="swiper-slide">
-								<?php get_template_part("./woocommerce/content", "product", array("productID" => $id)); ?>
-							</div>
+						<?php foreach($video_guide_list as $video): 
+							$video_url = $video['video_url'];
+							$thumbnail = $video['video_thumbnail'];
+						?>
+						<div class="swiper-slide">
+							<a class="video-guide-item" href="<?= esc_url($video_url) ?>" data-fancybox="video-guide" data-type="iframe">
+								<div class="img-ratio ratio:pt-[600_1170]">
+									<?php if ($thumbnail): ?>
+									<img class="lozad" data-src="<?= esc_url($thumbnail['url']) ?>" alt="<?= esc_attr($thumbnail['alt']) ?>" />
+									<?php endif; ?>
+								</div>
+							</a>
+						</div>
 						<?php endforeach; ?>
 					</div>
 				</div>
-				<div class="swiper-navigation is-between">
-					<div class="swiper-btn swiper-btn-prev">
-						<i class="far fa-arrow-left"></i>
-					</div>
-					<div class="swiper-btn swiper-btn-next">
-						<i class="far fa-arrow-right"></i>
-					</div>
+				<div class="wrapper-controll">
+					<button class="btn btn-slide btn-swiper-prev btn-video-prev btn-slide-1 btn-slide"><i class="fa-regular fa-angle-left"></i></button>
+					<button class="btn btn-slide btn-swiper-next btn-video-next btn-slide-1 btn-slide"><i class="fa-regular fa-angle-right"></i></button>
 				</div>
 			</div>
-		</div>
-	</section>
-<?php endif; ?>
+		</section>
+		<?php endif; ?>
 
-<div class="product-detail-modal" id="product-detail-modal" style="display: none;">
-	<div class="heading-4 section-title font-bold mb-5">
-		<?php the_title() ?>
-	</div>
-	<div class="form-product-detail body-3">
-		<?php echo do_shortcode('[contact-form-7 id="4b2e199" title="Form sản phẩm"]') ?>
-	</div>
-</div>
+		<?php if ($productOtherQuery->have_posts()): ?>
+		<section class="section-related-products related products">
+			<div class="container">
+				<h2 class="section-title h30"><strong>SẢN PHẨM</strong> LIÊN QUAN</h2>
+				<div class="related-products-wrap">
+					<div class="swiper swiper-related">
+						<div class="swiper-wrapper">
+							<?php while ($productOtherQuery->have_posts()) : $productOtherQuery->the_post(); ?>
+							<div class="swiper-slide">
+								<?php wc_get_template_part("content", "product"); ?>
+							</div>
+							<?php endwhile; wp_reset_postdata(); ?>
+						</div>
+					</div>
+					<button class="btn btn-slide btn-related-prev"><i class="fa-regular fa-angle-left"></i></button>
+					<button class="btn btn-slide btn-related-next"><i class="fa-regular fa-angle-right"></i></button>
+				</div>
+			</div>
+		</section>
+		<?php endif; ?>

@@ -27,7 +27,7 @@ $searchUrl = home_url() . "/?s=";
                     $woo_account_page_url = get_permalink($woo_account_page);
                     ?>
                     <a class="header-account" href="<?= $woo_account_page_url ?>" aria-label="Tài khoản"><i class="fa-regular fa-user"></i></a>
-                    <a class="header-cart" href="<?= wc_get_cart_url() ?>" aria-label="Giỏ hàng"><i class="fa-regular fa-cart-shopping"></i><span class="qty"><?php
+                    <a class="header-cart cart-toggle"><i class="fa-regular fa-cart-shopping"></i><span class="qty"><?php
                             $items_count = WC()->cart->get_cart_contents_count();
                             echo ($items_count) ? $items_count : 0; 
                         ?></span></a>
@@ -42,6 +42,23 @@ $searchUrl = home_url() . "/?s=";
         </div>
     </div>
 </header>
+
+<div class="mini-cart-popup">
+	<?php woocommerce_mini_cart(); ?>
+</div>
+<div class="mini-cart-backdrop backdrop cart-toggle"></div>
+<div class="menu-mobile-backdrop backdrop "></div>
+<div class="menu-mobile">
+	<div class="menu-mobile-wrapper">
+		<div class="menu-mobile-header">
+			<div class="close-menu close-menu-mobile"><span class="far fa-xmark"></span></div>
+			<div class="logo">
+				<?php echo get_custom_logo(); ?>
+			</div>
+		</div>
+		<div class="menu-mobile-body"></div>
+	</div>
+</div>
 <div class="wrap-menu-mobile">
     <div class="menu-mobile">
         <div class="menu-logo"> <a href="<?= home_url() ?>"><img class="lozad" data-src="<?= THEME_URI ?>/UI/img/logo-default.png" alt="" /></a>

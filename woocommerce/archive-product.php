@@ -26,80 +26,62 @@ get_header();
 $term_description = term_description();
 ?>
 
-<section class="section-large overflow-hidden">
+<section class="section-product-list">
 	<div class="container">
-		<div class="row">
-			<div class="col-lg-3">
-				<div class="filter-list">
-					<div class="filter-item">
-						<div class="filter-item-title d-flex items-center justify-between mb-4">
-							<span class="heading-5 font-bold">
-								<?= __('Theo Thương hiệu', 'canhcamtheme') ?>
-							</span>
-							<em class="fal fa-chevron-up"></em>
-						</div>
-						<div class="filter-item-content">
-							<?php echo do_shortcode('[facetwp facet="filter_brand"]') ?>
-						</div>
-					</div>
-					<div class="filter-item">
-						<div class="filter-item-title d-flex items-center justify-between mb-4">
-							<span class="heading-5 font-bold">
-								<?= __('Theo Dòng xe', 'canhcamtheme') ?>
-							</span>
-							<em class="fal fa-chevron-up"></em>
-						</div>
-						<div class="filter-item-content">
-							<?php echo do_shortcode('[facetwp facet="filter_car_type"]') ?>
-						</div>
-					</div>
-					<div class="filter-item">
-						<div class="filter-item-title d-flex items-center justify-between mb-4">
-							<span class="heading-5 font-bold">
-								<?= __('Theo giá', 'canhcamtheme') ?>
-							</span>
-							<em class="fal fa-chevron-up"></em>
-						</div>
-						<div class="filter-item-content">
-							<?php echo do_shortcode('[facetwp facet="filter_price"]') ?>
-						</div>
+		<div class="product-layout">
+			<aside class="product-sidebar">
+				<div class="filter-group filter-item" data-filter-group>
+					<button class="filter-group__toggle filter-item-title" type="button" aria-expanded="true"><span><?= __('Theo thương hiệu', 'canhcamtheme') ?></span><i class="fa-regular fa-chevron-down"></i></button>
+					<div class="filter-group__body filter-item-content">
+						<?php echo do_shortcode('[facetwp facet="brands"]') ?>
 					</div>
 				</div>
-			</div>
-			<div class="col-lg-9">
-				<div class="d-flex product-list-toolbar gap-lg-10 gap-4 justify-lg-end mb-5">
+				<div class="filter-group filter-item" data-filter-group>
+					<button class="filter-group__toggle filter-item-title" type="button" aria-expanded="true"><span><?= __('Theo dòng xe', 'canhcamtheme') ?></span><i class="fa-regular fa-chevron-down"></i></button>
+					<div class="filter-group__body filter-item-content">
+						<?php echo do_shortcode('[facetwp facet="categories_product"]') ?>
+					</div>
+				</div>
+				<div class="filter-group filter-item" data-filter-group>
+					<button class="filter-group__toggle filter-item-title" type="button" aria-expanded="true"><span><?= __('Theo giá', 'canhcamtheme') ?></span><i class="fa-regular fa-chevron-down"></i></button>
+					<div class="filter-group__body filter-item-content">
+						<?php echo do_shortcode('[facetwp facet="filter_price"]') ?>
+					</div>
+				</div>
+			</aside>
+			<div class="product-main">
+				<div class="product-head">
+					<h1 class="product-heading"><?php woocommerce_page_title(); ?></h1>
 					<div class="product-sort">
-						<span class="body-1">
-							<?= __('Chế độ xem', 'canhcamtheme') ?>
-						</span>
-						<?php echo do_shortcode('[facetwp facet="display_mode"]') ?>
-					</div>
-					<div class="product-sort is-sort">
-						<span class="body-1">
-							<?= __('Sắp xếp', 'canhcamtheme') ?>
-						</span>
-						<?php echo do_shortcode('[facetwp facet="sort_by"]') ?>
+                        <span class="product-sort__label"><?= __('Sắp xếp', 'canhcamtheme') ?></span>
+                        <div class="sort-dropdown" data-sort-dropdown>
+                            <?php echo do_shortcode('[facetwp facet="sort_by"]') ?>
+                        </div>
 					</div>
 				</div>
+                <?php if ($term_description) : ?>
 				<div class="body-1 mb-lg-8 mb-6">
 					<?php echo $term_description ?>
 				</div>
-				<div class="row equal-height">
-					<?php
-					if (wc_get_loop_prop('total')) {
-						while (have_posts()) {
-							the_post();
-
-							do_action('woocommerce_shop_loop');
-
-							echo '<div class="col-md-4 col-6">';
-							wc_get_template_part('content', 'product');
-							echo '</div>';
+                <?php endif; ?>
+				<div class="facetwp-template">
+					<div class="product-grid">
+						<?php
+						if (wc_get_loop_prop('total')) {
+							while (have_posts()) {
+								the_post();
+								do_action('woocommerce_shop_loop');
+								echo '<div class="product-grid__item">';
+								wc_get_template_part('content', 'product');
+								echo '</div>';
+							}
 						}
-					}
-					?>
+						?>
+					</div>
 				</div>
-				<?php echo do_shortcode('[facetwp facet="pagination"]') ?>
+				<div class="facetwp-pager">
+					<?php echo do_shortcode('[facetwp facet="pagination"]') ?>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -1,0 +1,114 @@
+.mini-cart-popup
+	position: fixed
+	top: 0
+	right: r(-420px)
+	display: flex
+	flex-direction: column
+	width: r(420px)
+	max-width: 100%
+	height: 100%
+	background-color: #fff
+	z-index: 100000
+	transition: .3s
+	box-sizing: border-box
+	&.open
+		right: 0
+
+.mini-cart-header
+	display: flex
+	justify-content: center
+	align-items: center
+	padding: r(24px)
+	border-bottom: 1px solid #e5e5e5
+	position: relative
+	h3
+		@extend .heading-5
+		font-weight: 700
+		text-transform: uppercase
+	.btn-close-cart
+		position: absolute
+		right: r(20px)
+		top: 50%
+		transform: translateY(-50%)
+		cursor: pointer
+		transition: .3s
+		font-size: r(28px)
+		+text(gray-300)
+		&:hover
+			transform: translateY(-50%) scale(1.1)
+
+.mini-cart-content-wrapper
+	position: relative
+	height: 100%
+	overflow: hidden
+
+.mini-cart-content
+	height: 100%
+	overflow: auto
+	padding: r(24px)
+	@extend .body-3
+	.cart-empty
+		display: flex
+		flex-direction: column
+		align-items: center
+		justify-content: center
+		width: 100%
+		padding: r(16px)
+		height: 100%
+		&-icon
+			opacity: .15
+			margin: 0
+			margin-bottom: r(8px)
+			svg
+				width: r(80px)
+	.mini_cart_item
+		display: flex
+		// align-items: center
+		margin-bottom: r(24px) !important
+		gap: r(16px)
+		&:before,&:after
+			display: none !important
+		.product-thumbnail
+			+flex-width(r(60px))
+			height: r(60px)
+			img
+				+fit-contain
+		.product-info
+			display: flex
+			flex-direction: column
+			gap: r(4px)
+			flex: 1
+		.product-name
+			@extend .body-2
+			font-weight: 700
+			+text(primary-4)
+
+.mini-cart-footer
+	padding: r(24px)
+	margin-top: auto
+	background: rgba(0, 0, 0, 0.03)
+	.mini-footer-totals
+		margin-bottom: r(24px)
+		display: flex
+		justify-content: space-between
+		gap: r(16px)
+		@extend .body-1
+	.mini-footer-buttons
+		display: flex
+		flex-direction: column
+		gap: r(8px)
+		.button
+			@extend .btn
+			@extend .btn-primary
+			background: transparent
+			border: 0
+			&.checkout
+				@extend .btn-primary
+				display: none
+			+on-hover
+				+bg(primary-red)
+				+text(white)
+
+.woocommerce table.cart td.actions .input-text
+	width: r(160px)
+	padding: r(12px) !important
