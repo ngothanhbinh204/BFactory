@@ -24,7 +24,6 @@ class LoopSlider {
 				slidesPerView: 1.25,
 				spaceBetween: 12,
 				watchSlidesVisibility: true,
-				centeredSlides: true,
 				navigation: {
 					prevEl: swiperBtnPrev,
 					nextEl: swiperBtnNext,

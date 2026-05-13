@@ -4,8 +4,7 @@ Template name: Page - Hệ thống phân phối
 */
 ?>
 <?php get_header() ?>
-<?php get_template_part("./modules/common/breadcrumb") ?>
-
+<?php get_template_part('./modules/common/banner'); ?>
 <?php
 $dealerQuery = new WP_Query([
 	'post_type' => 'dealer',
@@ -85,11 +84,11 @@ $popup = get_field('popup');
 	<h3 class="heading-4 font-bold"><?php echo $popup['title'] ?></h3>
 	<div class="body-2 mt-5"><?php echo $popup['content'] ?></div>
 </div>
-<div class="btn-wrap">
+<!-- <div class="btn-wrap">
 	<button onclick="Fancybox.close();" class="btn btn-primary mt-5">
 		<?php _e('Đóng', 'canhcamtheme') ?>
 	</button>
-</div>
+</div> -->
 </div>
 
 <!-- <script>

@@ -8,6 +8,7 @@ Template name: Page - Liên hệ
 
 <?php
 $info_list = get_field("info_list");
+$contactform_shortcode = get_field('contactform_shortcode');
 ?>
 
 <section class="section-large">
@@ -19,7 +20,7 @@ $info_list = get_field("info_list");
 			<?php foreach ($info_list as $item) : ?>
 				<div class="col-lg-3 col-6">
 					<div class="contact-info-item bg-gray-100 p-6 p-lg-10 text-center">
-						<div class="icon icon-48 fz-24 bg-primary-4 text-primary-2 ">
+						<div class="icon icon-48 fz-24 bg-primary-4 text-white ">
 							<?= $item["icon"] ?>
 						</div>
 						<div class="content mt-4 text-center">
@@ -42,7 +43,8 @@ $info_list = get_field("info_list");
 			</div>
 			<div class="col-lg-6">
 				<div class="contact-form p-lg-10 p-8 bg-gray-100 body-1 text-center">
-					<?= do_shortcode('[contact-form-7 id="92dddc7" title="Form liên hệ"]') ?>
+					<?php $contactform_shortcode = get_field('contactform_shortcode'); ?>
+					<?php echo do_shortcode($contactform_shortcode) ?>
 				</div>
 			</div>
 		</div>

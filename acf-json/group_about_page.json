@@ -1,0 +1,207 @@
+{
+    "key": "group_about_page",
+    "title": "About Page Content",
+    "fields": [
+
+        { "key": "field_tab_about_intro", "label": "Giới thiệu (Intro)", "name": "", "type": "tab", "placement": "top", "endpoint": 0 },
+
+        { "key": "field_about_intro_label", "label": "Label nhỏ", "name": "about_intro_label", "type": "text" },
+        { "key": "field_about_intro_title", "label": "Tiêu đề chính", "name": "about_intro_title", "type": "wysiwyg" },
+        { "key": "field_about_intro_col1", "label": "Nội dung cột trái", "name": "about_intro_col1", "type": "wysiwyg" },
+        { "key": "field_about_intro_col2", "label": "Nội dung cột phải", "name": "about_intro_col2", "type": "wysiwyg" },
+        { "key": "field_about_intro_image", "label": "Ảnh minh hoạ", "name": "about_intro_image", "type": "image", "return_format": "array" },
+
+        { "key": "field_tab_about_vision", "label": "Tầm nhìn (Vision)", "name": "", "type": "tab", "placement": "top", "endpoint": 0 },
+
+        { "key": "field_about_vision_title", "label": "Tiêu đề", "name": "about_vision_title", "type": "wysiwyg" },
+        { "key": "field_about_vision_icon", "label": "Icon dấu ngoặc kép", "name": "about_vision_icon", "type": "image", "return_format": "array" },
+        { "key": "field_about_vision_quote", "label": "Câu trích dẫn tầm nhìn", "name": "about_vision_quote", "type": "textarea" },
+
+        { "key": "field_tab_about_mission", "label": "Sứ mệnh (Mission)", "name": "", "type": "tab", "placement": "top", "endpoint": 0 },
+
+        { "key": "field_about_mission_title", "label": "Tiêu đề", "name": "about_mission_title", "type": "wysiwyg" },
+        { "key": "field_about_mission_subtitle", "label": "Subtitle", "name": "about_mission_subtitle", "type": "text" },
+        { "key": "field_about_mission_image", "label": "Ảnh minh hoạ", "name": "about_mission_image", "type": "image", "return_format": "array" },
+        {
+            "key": "field_about_mission_list",
+            "label": "Danh sách sứ mệnh",
+            "name": "about_mission_list",
+            "type": "repeater",
+            "layout": "table",
+            "button_label": "Thêm mục",
+            "sub_fields": [
+                { "key": "field_about_mission_item_text", "label": "Nội dung", "name": "text", "type": "text" }
+            ]
+        },
+
+        { "key": "field_tab_about_values", "label": "Giá trị cốt lõi (Core Values)", "name": "", "type": "tab", "placement": "top", "endpoint": 0 },
+
+        { "key": "field_about_values_title", "label": "Tiêu đề section", "name": "about_values_title", "type": "text" },
+        { "key": "field_about_values_bg", "label": "Ảnh nền", "name": "about_values_bg", "type": "image", "return_format": "array" },
+        {
+            "key": "field_about_values_list",
+            "label": "Danh sách giá trị cốt lõi",
+            "name": "about_values_list",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Thêm giá trị",
+            "sub_fields": [
+                { "key": "field_about_values_item_title", "label": "Tên giá trị", "name": "title", "type": "text" },
+                { "key": "field_about_values_item_content", "label": "Mô tả", "name": "content", "type": "wysiwyg" }
+            ]
+        },
+
+        { "key": "field_tab_about_tech", "label": "Công nghệ (Technology)", "name": "", "type": "tab", "placement": "top", "endpoint": 0 },
+
+        { "key": "field_about_tech_title", "label": "Tiêu đề", "name": "about_tech_title", "type": "wysiwyg" },
+        { "key": "field_about_tech_subtitle", "label": "Subtitle", "name": "about_tech_subtitle", "type": "wysiwyg" },
+        { "key": "field_about_tech_box_header", "label": "Box – Nhãn (Header Tag)", "name": "about_tech_box_header", "type": "text" },
+        { "key": "field_about_tech_box_heading", "label": "Box – Tiêu đề", "name": "about_tech_box_heading", "type": "text" },
+        { "key": "field_about_tech_box_content", "label": "Box – Nội dung", "name": "about_tech_box_content", "type": "wysiwyg" },
+        { "key": "field_about_tech_image", "label": "Ảnh minh hoạ", "name": "about_tech_image", "type": "image", "return_format": "array" },
+          {
+            "key": "field_tab_help",
+            "label": "Help Section",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_about_help_title",
+            "label": "Title",
+            "name": "about_help_title",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "BẠN CẦN TRỢ GIÚP?",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_about_help_list",
+            "label": "Help List",
+            "name": "about_help_list",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "table",
+            "button_label": "Add Item",
+            "sub_fields": [
+                {
+                    "key": "field_about_help_icon",
+                    "label": "Icon",
+                    "name": "icon",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "preview_size": "thumbnail",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": ""
+                },
+                {
+                    "key": "field_about_help_title_sub",
+                    "label": "Title",
+                    "name": "title",
+                    "type": "wysiwyg",
+                    "tabs": "all",
+                    "toolbar": "full",
+                    "media_upload": 1,
+                    "delay": 0,
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_about_help_desc",
+                    "label": "Description",
+                    "name": "desc",
+                    "type": "wysiwyg",
+                    "tabs": "all",
+                    "toolbar": "full",
+                    "media_upload": 1,
+                    "delay": 0,
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                }
+            ]
+        }
+
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-about.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "ACF fields for the About page"
+}

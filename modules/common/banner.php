@@ -28,14 +28,16 @@ $banner = get_field('banner_select_page', $id);
 
 ?>
 <?php if ($banner) : ?>
-	<section class="page-banner-main">
-		<div class="img img-ratio pt-[calc(656/1920*100rem)]">
-			<?php foreach ($banner as $item) : ?>
-				<?php echo post_thumbnail($item->ID, "w-100") ?>
-			<?php endforeach; ?>
+	<section class="wrapper-banner-breadcrumb">
+		<div class="page-banner-main">
+			<div class="img img-ratio pt-[calc(656/1920*100rem)]">
+				<?php foreach ($banner as $item) : ?>
+					<?php echo post_thumbnail($item->ID, "w-100") ?>
+				<?php endforeach; ?>
+			</div>
 		</div>
+		<?php get_template_part("./modules/common/breadcrumb") ?>
 	</section>
-	<?php get_template_part("./modules/common/breadcrumb") ?>
 <?php else : ?>
 	<?php get_template_part("./modules/common/breadcrumb") ?>
 <?php endif; ?>

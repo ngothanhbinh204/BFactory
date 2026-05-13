@@ -10,7 +10,8 @@
 	"scripts": {
 		"start": "gulp",
 		"init": "gulp init",
-		"upload": "gulp upload"
+		"upload": "gulp upload",
+		"build": "gulp build"
 	},
 	"babel": {
 		"presets": [

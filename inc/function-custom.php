@@ -212,5 +212,69 @@ function bfactory_get_dual_price_html($product) {
         ';
     }
 
-    return '<div class="product-item__price">' . $price_html . '</div>';
+    return '<div class="product-item__price">' . $price_html . '</div>' ;
 }
+
+
+add_shortcode('custom_wpml_switcher', function() {
+    // Kiểm tra xem WPML có đang hoạt động không
+    if (!function_exists('icl_get_languages')) {
+        return '';
+    }
+
+    // Lấy danh sách ngôn ngữ từ WPML
+    // skip_missing = 0 để hiển thị cả ngôn ngữ chưa có bản dịch (nếu muốn)
+    $languages = icl_get_languages('skip_missing=0');
+
+    if (empty($languages)) {
+        return '';
+    }
+
+    // Tách ngôn ngữ hiện tại và các ngôn ngữ còn lại
+    $current_lang = null;
+    $other_langs = [];
+
+    foreach ($languages as $l) {
+        if ($l['active']) {
+            $current_lang = $l;
+        } else {
+            $other_langs[] = $l;
+        }
+    }
+
+    ob_start();
+    ?>
+    <div class="header-language">
+        <div class="wpml-ls">
+            <ul>
+                <?php if ($current_lang): ?>
+                <li class="wpml-ls-item wpml-ls-item-<?php echo esc_attr($current_lang['language_code']); ?> wpml-ls-current-language">
+                    <a class="wpml-ls-link" href="<?php echo esc_url($current_lang['url']); ?>">
+                        <span class="wpml-ls-flag">
+                            <img src="<?php echo esc_url($current_lang['country_flag_url']); ?>" alt="<?php echo esc_attr($current_lang['native_name']); ?>" />
+                        </span>
+                        <span class="wpml-ls-native"><?php echo esc_html(strtoupper($current_lang['language_code'] == 'vi' ? 'VN' : $current_lang['language_code'])); ?></span>
+                    </a>
+                    
+                    <?php if (!empty($other_langs)): ?>
+                    <ul class="wpml-ls-sub-menu">
+                        <?php foreach ($other_langs as $lang): ?>
+                        <li class="wpml-ls-item wpml-ls-item-<?php echo esc_attr($lang['language_code']); ?>">
+                            <a class="wpml-ls-link" href="<?php echo esc_url($lang['url']); ?>">
+                                <span class="wpml-ls-flag">
+                                    <img src="<?php echo esc_url($lang['country_flag_url']); ?>" alt="<?php echo esc_attr($lang['native_name']); ?>" />
+                                </span>
+                                <span class="wpml-ls-native"><?php echo esc_html(strtoupper($lang['language_code'] == 'vi' ? 'VN' : $lang['language_code'])); ?></span>
+                            </a>
+                        </li>
+                        <?php endforeach; ?>
+                    </ul>
+                    <?php endif; ?>
+                </li>
+                <?php endif; ?>
+            </ul>
+        </div>
+    </div>
+    <?php
+    return ob_get_clean();
+});

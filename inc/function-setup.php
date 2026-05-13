@@ -121,4 +121,24 @@ add_post_type_support('page', 'excerpt');
 /**
  * Force sub-category to use tempate parent
  */
+
+/**
+ * ACF JSON sync — post types & taxonomies folders (ACF Pro 6.1+)
+ */
+add_filter('acf/post_type/save_paths', function($paths) {
+    $paths[] = get_template_directory() . '/post-types';
+    return $paths;
+});
+add_filter('acf/post_type/load_paths', function($paths) {
+    $paths[] = get_template_directory() . '/post-types';
+    return $paths;
+});
+add_filter('acf/taxonomy/save_paths', function($paths) {
+    $paths[] = get_template_directory() . '/taxonomies';
+    return $paths;
+});
+add_filter('acf/taxonomy/load_paths', function($paths) {
+    $paths[] = get_template_directory() . '/taxonomies';
+    return $paths;
+});
 ?>

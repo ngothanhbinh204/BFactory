@@ -1,0 +1,54 @@
+.dealer-filter
+	.row
+		+gap-override(12px)
+	.form-group
+		select
+			background-color: color(gray-50)
+			border: 0 !important
+		input[type='submit']
+			height: r(44px)
+
+.dealer-result-list
+	padding: r(16px) r(24px)
+	+bg(gray-50)
+	height: r(708px)
+	overflow-y: auto
+
+.dealer-item
+	padding: r(16px)
+	display: grid
+	grid-template-columns: 1fr
+	gap: r(16px)
+	+bg(primary-2)
+	border: 1px solid transparent
+	cursor: pointer
+	&.active
+		border-color: color(primary-4)
+	&-image
+		figure
+			+res-ratio(1,1)
+			border: 1px solid color(gray-50)
+			img
+				object-fit: contain
+	.name
+		margin-bottom: r(8px)
+	.address,.phone
+		display: flex
+		gap: r(12px)
+		margin-top: r(8px)
+		margin-bottom: r(12px)
+		span
+			+text(primary-4)
+			position: relative
+			top: r(4px)
+			+flex-width(r(16px))
+	.direction
+		+text(primary-4)
+		display: block
+
+.result-map
+	iframe
+		min-height: r(500px)
+
+#ajax_msg,#map_canvas
+	display: none !important

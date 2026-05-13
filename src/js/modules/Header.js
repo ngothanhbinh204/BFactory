@@ -1,11 +1,17 @@
 var $globalHeader = $(".global-header");
 
 $(function () {
-	let headerHeight = $globalHeader.outerHeight();
-	$("body").css({
-		"--header-height": headerHeight + "px",
-	});
-	window.headerHeight = headerHeight;
+	const updateHeaderHeight = () => {
+		let headerHeight = $globalHeader.outerHeight();
+		$("body").css({
+			"--header-height": headerHeight + "px",
+		});
+		window.headerHeight = headerHeight;
+	};
+
+	updateHeaderHeight();
+
+	$(window).on("resize", updateHeaderHeight);
 
 	let headerPositionCss = $globalHeader.css("position");
 

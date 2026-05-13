@@ -1,0 +1,117 @@
+{
+    "key": "group_page_support",
+    "title": "Cấu hình trang Hỗ trợ (Support Page)",
+    "fields": [
+        {
+            "key": "field_tab_sidebar_icon",
+            "label": "Cấu hình Sidebar",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_support_icon",
+            "label": "Icon trên Sidebar (Menu Hỗ trợ)",
+            "name": "support_icon",
+            "type": "text",
+            "instructions": "Nhập class FontAwesome (vd: fa-regular fa-comment-question) hoặc dán toàn bộ mã SVG / thẻ <img> vào đây. (Áp dụng cho các trang con của trang Hỗ trợ)",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "fa-regular fa-circle-question",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_support_icon_image",
+            "label": "Hoặc tải lên Icon Ảnh (Tuỳ chọn)",
+            "name": "support_icon_image",
+            "type": "image",
+            "instructions": "Nếu bạn muốn dùng ảnh (.png, .svg) thay vì mã FontAwesome thì tải lên ở đây. Nếu tải ảnh, ảnh này sẽ được ưu tiên hiển thị.",
+            "return_format": "url",
+            "preview_size": "thumbnail"
+        },
+        {
+            "key": "field_tab_faqs",
+            "label": "FAQs (Câu hỏi thường gặp)",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_enable_faqs",
+            "label": "Bật phần FAQs?",
+            "name": "enable_faqs",
+            "type": "true_false",
+            "message": "Đánh dấu chọn để hiển thị phần FAQs ở cuối trang này",
+            "default_value": 0,
+            "ui": 1
+        },
+        {
+            "key": "field_support_faqs",
+            "label": "Danh sách câu hỏi thường gặp",
+            "name": "support_faqs",
+            "type": "repeater",
+            "layout": "row",
+            "button_label": "Thêm câu hỏi",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_enable_faqs",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "sub_fields": [
+                {
+                    "key": "field_faq_question",
+                    "label": "Câu hỏi",
+                    "name": "question",
+                    "type": "text",
+                    "required": 1
+                },
+                {
+                    "key": "field_faq_answer",
+                    "label": "Câu trả lời",
+                    "name": "answer",
+                    "type": "wysiwyg",
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "required": 1
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-support.php"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": ""
+}

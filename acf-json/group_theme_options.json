@@ -1,0 +1,217 @@
+{
+    "key": "group_theme_options",
+    "title": "Theme Options: Header & Footer",
+    "fields": [
+        {
+            "key": "field_tab_header",
+            "label": "Header",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_header_logo_main",
+            "label": "Header Logo Main",
+            "name": "header_logo_main",
+            "type": "image",
+            "return_format": "url",
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_header_logo_mobile",
+            "label": "Header Logo Mobile",
+            "name": "header_logo_mobile",
+            "type": "image",
+            "return_format": "url",
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_tab_footer",
+            "label": "Footer",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_footer_bg",
+            "label": "Footer Background",
+            "name": "footer_bg",
+            "type": "image",
+            "return_format": "url",
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_footer_logo",
+            "label": "Footer Logo",
+            "name": "footer_logo",
+            "type": "image",
+            "return_format": "url",
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_footer_tagline",
+            "label": "Footer Tagline",
+            "name": "footer_tagline",
+            "type": "text"
+        },
+        {
+            "key": "field_footer_partner_label",
+            "label": "Partner Label",
+            "name": "footer_partner_label",
+            "type": "textarea",
+            "rows": 2
+        },
+        {
+            "key": "field_footer_partner_logo",
+            "label": "Partner Logo",
+            "name": "footer_partner_logo",
+            "type": "image",
+            "return_format": "url",
+            "preview_size": "thumbnail"
+        },
+        {
+            "key": "field_footer_partner_url",
+            "label": "Partner URL",
+            "name": "footer_partner_url",
+            "type": "url"
+        },
+        {
+            "key": "field_footer_socials",
+            "label": "Footer Socials",
+            "name": "footer_socials",
+            "type": "repeater",
+            "layout": "table",
+            "button_label": "Thêm mạng xã hội",
+            "sub_fields": [
+                {
+                    "key": "field_footer_social_icon",
+                    "label": "Icon",
+                    "name": "icon",
+                    "type": "select",
+                    "choices": {
+                        "fa-brands fa-facebook-f": "Facebook",
+                        "fa-brands fa-instagram": "Instagram",
+                        "fa-brands fa-tiktok": "Tiktok",
+                        "fa-brands fa-youtube": "Youtube",
+                        "fa-brands fa-twitter": "Twitter",
+                        "fa-brands fa-linkedin-in": "LinkedIn"
+                    },
+                    "return_format": "value"
+                },
+                {
+                    "key": "field_footer_social_link",
+                    "label": "Link",
+                    "name": "link",
+                    "type": "link",
+                    "return_format": "array"
+                }
+            ]
+        },
+        {
+            "key": "field_footer_company_name",
+            "label": "Company Name",
+            "name": "footer_company_name",
+            "type": "text"
+        },
+        {
+            "key": "field_footer_address",
+            "label": "Address",
+            "name": "footer_address",
+            "type": "textarea",
+            "rows": 2
+        },
+        {
+            "key": "field_footer_hotline_title",
+            "label": "Hotline Title",
+            "name": "footer_hotline_title",
+            "type": "text",
+            "default_value": "Hotline"
+        },
+        {
+            "key": "field_footer_hotline_content",
+            "label": "Hotline Content",
+            "name": "footer_hotline_content",
+            "type": "wysiwyg",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_footer_working_hours",
+            "label": "Working Hours",
+            "name": "footer_working_hours",
+            "type": "wysiwyg"
+        },
+        {
+            "key": "field_footer_email",
+            "label": "Email",
+            "name": "footer_email",
+            "type": "email"
+        },
+        {
+            "key": "field_footer_copyright",
+            "label": "Copyright",
+            "name": "footer_copyright",
+            "type": "text"
+        },
+        {
+            "key": "field_footer_brand_text",
+            "label": "Brand Text",
+            "name": "footer_brand_text",
+            "type": "text"
+        },
+        {
+            "key": "field_tab_fixed_cta",
+            "label": "Fixed CTA (Tool Gọi/Nhắn Tin)",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_cta_phone",
+            "label": "Số điện thoại hiển thị",
+            "name": "cta_phone",
+            "type": "wysiwyg"
+        },
+        {
+            "key": "field_cta_socials",
+            "label": "Danh sách các nút Social",
+            "name": "cta_socials",
+            "type": "repeater",
+            "layout": "table",
+            "sub_fields": [
+                {
+                    "key": "field_cta_social_icon",
+                    "label": "FontAwesome Icon Class",
+                    "name": "icon",
+                    "type": "text",
+                    "instructions": "VD: fa-light fa-envelope, fa-brands fa-messenger..."
+                },
+                {
+                    "key": "field_cta_social_link",
+                    "label": "Đường dẫn (Link)",
+                    "name": "link",
+                    "type": "url"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "theme-settings"
+            }
+        ]
+    ],
+    "menu_order": 1,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": ""
+}

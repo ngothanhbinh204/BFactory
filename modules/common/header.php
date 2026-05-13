@@ -1,10 +1,12 @@
 <?php
 $searchUrl = home_url() . "/?s=";
+$header_logo_main = get_field('header_logo_main', 'option') ?: THEME_URI . '/UI/img/logo_main.svg';
+$header_logo_mobile = get_field('header_logo_mobile', 'option') ?: THEME_URI . '/UI/img/logo-default.png';
 ?>
-<header>
+<header class="global-header">
     <div class="container-header">
         <div class="header-child">
-            <div class="header-logo"><a href="<?= home_url() ?>"><img class="lozad" data-src="<?= THEME_URI ?>/UI/img/logo_main.svg" alt="" /></a>
+            <div class="header-logo"><a href="<?= home_url() ?>"><img class="lozad" data-src="<?= $header_logo_main ?>" alt="" /></a>
             </div>
             <nav class="header-menu">
                 <?php wp_nav_menu([
@@ -18,10 +20,9 @@ $searchUrl = home_url() . "/?s=";
                     <button type="submit" aria-label="Tìm kiếm"><i class="fa-regular fa-magnifying-glass"></i></button>
                 </form>
                 <div class="header-action">
-                    <div class="header-language">
-                        <!-- WPML or similar logic -->
-                         <div id="google_translate_element"></div>
-                    </div>
+                    <?php if ( shortcode_exists( 'custom_wpml_switcher' ) ) : ?>
+                        <?php echo do_shortcode('[custom_wpml_switcher]'); ?>
+                    <?php endif; ?>
                     <?php
                     $woo_account_page = get_option('woocommerce_myaccount_page_id');
                     $woo_account_page_url = get_permalink($woo_account_page);
@@ -47,7 +48,7 @@ $searchUrl = home_url() . "/?s=";
 	<?php woocommerce_mini_cart(); ?>
 </div>
 <div class="mini-cart-backdrop backdrop cart-toggle"></div>
-<div class="menu-mobile-backdrop backdrop "></div>
+<!-- <div class="menu-mobile-backdrop backdrop "></div>
 <div class="menu-mobile">
 	<div class="menu-mobile-wrapper">
 		<div class="menu-mobile-header">
@@ -58,10 +59,10 @@ $searchUrl = home_url() . "/?s=";
 		</div>
 		<div class="menu-mobile-body"></div>
 	</div>
-</div>
+</div> -->
 <div class="wrap-menu-mobile">
     <div class="menu-mobile">
-        <div class="menu-logo"> <a href="<?= home_url() ?>"><img class="lozad" data-src="<?= THEME_URI ?>/UI/img/logo-default.png" alt="" /></a>
+        <div class="menu-logo"> <a href="<?= home_url() ?>"><img class="lozad" data-src="<?= $header_logo_mobile ?>" alt="" /></a>
         </div>
         <div class="menu-list">
             <?php wp_nav_menu([

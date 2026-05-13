@@ -168,7 +168,7 @@
 .menu-mobile
 	position: fixed
 	top: 0
-	left: -100%
+	// left: -100%
 	width: 80vw
 	height: 100vh
 	+bg(primary-2)
@@ -224,3 +224,11 @@
 	+bg(black)
 	z-index: 101
 	display: none
+
+.admin-bar
+	header
+		top: r(32px)
+
+.support-sidebar
+	top: calc(var(--header-height) + #{r(32px)})
+

@@ -89,15 +89,26 @@ $(document).ready(() => {
 				slidesPerView: "5",
 			},
 		},
-	});
-
-	const singleSlider = new LoopSlider(".single-slider", {
-		1024: {
-			spaceBetween: 40,
-			slidesPerView: 1,
-			centeredSlides: false,
+		navigation: {
+			nextEl: ".catalogue-slider .swiper-btn-next",
+			prevEl: ".catalogue-slider .swiper-btn-prev",
 		},
 	});
+
+	const singleSlider = new LoopSlider(
+		".single-slider",
+		{
+			1024: {
+				spaceBetween: 40,
+				slidesPerView: 1,
+				centeredSlides: false,
+			},
+		},
+		{
+			centeredSlides: true,
+			slidesPerView: 1,
+		}
+	);
 
 	const doubleSlider = new LoopSlider(".double-slider", {
 		576: {
