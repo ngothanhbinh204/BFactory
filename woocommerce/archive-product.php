@@ -31,21 +31,37 @@ $term_description = term_description();
 		<div class="product-layout">
 			<aside class="product-sidebar">
 				<div class="filter-group filter-item" data-filter-group>
-					<button class="filter-group__toggle filter-item-title" type="button" aria-expanded="true"><span><?= __('Theo thương hiệu', 'canhcamtheme') ?></span><i class="fa-regular fa-chevron-down"></i></button>
+					<button class="filter-group__toggle filter-item-title" type="button"
+						aria-expanded="true"><span><?= __('Theo thương hiệu', 'canhcamtheme') ?></span><i
+							class="fa-regular fa-chevron-down"></i></button>
 					<div class="filter-group__body filter-item-content">
 						<?php echo do_shortcode('[facetwp facet="brands"]') ?>
 					</div>
 				</div>
 				<div class="filter-group filter-item" data-filter-group>
-					<button class="filter-group__toggle filter-item-title" type="button" aria-expanded="true"><span><?= __('Theo dòng xe', 'canhcamtheme') ?></span><i class="fa-regular fa-chevron-down"></i></button>
+					<button class="filter-group__toggle filter-item-title" type="button"
+						aria-expanded="true"><span><?= __('Theo dòng xe', 'canhcamtheme') ?></span><i
+							class="fa-regular fa-chevron-down"></i></button>
 					<div class="filter-group__body filter-item-content">
 						<?php echo do_shortcode('[facetwp facet="categories_product"]') ?>
 					</div>
 				</div>
 				<div class="filter-group filter-item" data-filter-group>
-					<button class="filter-group__toggle filter-item-title" type="button" aria-expanded="true"><span><?= __('Theo giá', 'canhcamtheme') ?></span><i class="fa-regular fa-chevron-down"></i></button>
+					<button class="filter-group__toggle filter-item-title" type="button"
+						aria-expanded="true"><span><?= __('Theo giá', 'canhcamtheme') ?></span><i
+							class="fa-regular fa-chevron-down"></i></button>
 					<div class="filter-group__body filter-item-content">
-						<?php echo do_shortcode('[facetwp facet="filter_price"]') ?>
+						<div class="filter-price">
+
+							<?php echo do_shortcode('[facetwp facet="filter_price"]') ?>
+
+							<div class="filter-price__display">
+								<div class="filter-price__val is-min"></div>
+								<div class="filter-price__val is-max"></div>
+							</div>
+
+						</div>
+
 					</div>
 				</div>
 			</aside>
@@ -53,18 +69,19 @@ $term_description = term_description();
 				<div class="product-head">
 					<h1 class="product-heading"><?php woocommerce_page_title(); ?></h1>
 					<div class="product-sort">
-                        <span class="product-sort__label"><?= __('Sắp xếp', 'canhcamtheme') ?></span>
-                        <div class="sort-dropdown" data-sort-dropdown>
-                            <?php echo do_shortcode('[facetwp facet="sort_by"]') ?>
-                        </div>
+						<span class="product-sort__label"><?= __('Sắp xếp', 'canhcamtheme') ?></span>
+						<div class="sort-dropdown" data-sort-dropdown>
+							<?php echo do_shortcode('[facetwp facet="sort_by"]') ?>
+						</div>
 					</div>
 				</div>
-                <?php if ($term_description) : ?>
+				<?php if ($term_description) : ?>
 				<div class="body-1 mb-lg-8 mb-6">
 					<?php echo $term_description ?>
 				</div>
-                <?php endif; ?>
+				<?php endif; ?>
 				<div class="facetwp-template">
+					<div class="spinner-loading"></div>
 					<div class="product-grid">
 						<?php
 						if (wc_get_loop_prop('total')) {

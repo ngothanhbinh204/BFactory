@@ -59,3 +59,39 @@ class CustomMenuWalker extends Walker_Nav_Menu
 		$output .= '</li>';
 	}
 }
+
+/**
+ * Mobile Menu Walker to match UI HTML structure
+ */
+class Mobile_Menu_Walker extends Walker_Nav_Menu
+{
+    public function start_lvl( &$output, $depth = 0, $args = null ) {
+        $output .= '<ul class="mm-sub">';
+    }
+
+    public function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
+        $classes = empty( $item->classes ) ? array() : (array) $item->classes;
+        $classes_str = implode( ' ', array_filter( $classes ) );
+
+        $output .= '<li class="' . esc_attr( $classes_str ) . '">';
+
+        $attributes  = '';
+        if ( ! empty( $item->url ) ) {
+            $attributes .= ' href="' . esc_url( $item->url ) . '"';
+        }
+        
+        $title = apply_filters( 'the_title', $item->title, $item->ID );
+        
+        $link_content = isset($args->link_before) ? $args->link_before : '';
+        $link_content .= $title;
+        $link_content .= isset($args->link_after) ? $args->link_after : '';
+
+        $item_output = '<a' . $attributes . '>' . $link_content . '</a>';
+
+        if ( in_array( 'menu-item-has-children', $classes, true ) ) {
+            $item_output = '<div class="mm-item">' . $item_output . '<button class="mm-toggle" type="button" aria-label="Mở sub menu"><i class="fa-regular fa-chevron-down"></i></button></div>';
+        }
+
+        $output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
+    }
+}

@@ -31,7 +31,7 @@ if ($home_banner_list) :
 				<button class="btn btn-slide btn-swiper-next"><i class="fa-regular fa-angle-right"></i>
 				</button>
 			</div>
-			<div class="banner-controls">
+			<div class="banner-controls" data-aos="fade-up" data-aos-delay="700" data-aos-duration="800">
 				<button class="banner-play-pause" type="button" aria-label="Tạm dừng"><i
 						class="fa-solid fa-pause"></i></button>
 				<div class="banner-progress-track">

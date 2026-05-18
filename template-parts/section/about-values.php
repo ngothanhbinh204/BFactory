@@ -8,12 +8,12 @@ $bg_style = $about_values_bg ? 'style="background-image: url(' . esc_url($about_
 		<div class="wrap-padding">
 			<div class="container">
                 <?php if($about_values_title): ?>
-				<h2 class="section-title white left"><?php echo wp_kses_post($about_values_title); ?></h2>
+				<h2 class="section-title white left" data-ripple-text data-ripple-text-types="words" data-ripple-text-delay="0.08"><?php echo wp_kses_post($about_values_title); ?></h2>
                 <?php endif; ?>
                 <?php if($about_values_list): ?>
-				<div class="block-grid">
+				<div class="block-grid" data-stagger data-stagger-delay="0.18" data-stagger-duration="0.8" data-stagger-dir="bottom">
 					<?php foreach($about_values_list as $index => $item): ?>
-					<div class="item-grid" data-height-options='{"source": "child", "var": "--height-desc"}'>
+					<div class="item-grid" data-height-options='{"source": "child", "var": "--height-desc"}' data-stagger-item>
 						<div class="child">
 							<div class="item-grid-number"><span><?php echo str_pad($index + 1, 2, '0', STR_PAD_LEFT); ?></span></div>
 							<div class="item-grid-main">

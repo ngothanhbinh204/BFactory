@@ -6,9 +6,9 @@ $home_products_button = get_field('home_products_button');
 	<section class="section-products">
 		<div class="container">
             <?php if($home_products_title): ?>
-			<h2 class="section-title"><?php echo wp_kses_post($home_products_title); ?></h2>
+			<h2 class="section-title" data-ripple-text data-ripple-text-types="words" data-ripple-text-delay="0.07"><?php echo wp_kses_post($home_products_title); ?></h2>
             <?php endif; ?>
-			<div class="swiper-wrap">
+			<div class="swiper-wrap" data-aos="fade-up" data-aos-delay="150" data-aos-duration="800">
 				<div class="swiper swiper-products">
 					<div class="swiper-wrapper">
                         <?php 
@@ -40,7 +40,7 @@ $home_products_button = get_field('home_products_button');
 				</div>
 			</div>
             <?php if($home_products_button): ?>
-			<div class="section-center-cta"><a class="btn btn-primary-outline" href="<?php echo esc_url($home_products_button['url']); ?>"><span><?php echo esc_html($home_products_button['title']); ?></span><i
+			<div class="section-center-cta" data-aos="fade-up"><a class="btn btn-primary-outline" href="<?php echo esc_url($home_products_button['url']); ?>"><span><?php echo esc_html($home_products_button['title']); ?></span><i
 						class="fa-regular fa-arrow-right"></i></a></div>
             <?php endif; ?>
 		</div>

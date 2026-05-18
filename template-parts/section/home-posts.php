@@ -10,9 +10,9 @@ $home_posts_button = get_field('home_posts_button');
 		</div>
 		<div class="container">
             <?php if($home_posts_title): ?>
-			<h2 class="section-title"><?php echo wp_kses_post($home_posts_title); ?></h2>
+			<h2 class="section-title" data-ripple-text data-ripple-text-types="words" data-ripple-text-delay="0.07"><?php echo wp_kses_post($home_posts_title); ?></h2>
             <?php endif; ?>
-			<nav class="post-filter-nav" aria-label="Lọc bài viết">
+			<nav class="post-filter-nav" aria-label="Lọc bài viết" data-aos="fade-up" data-aos-delay="150">
 				<button class="filter-btn is-active" data-filter="all">Tất cả</button>
                 <?php 
                 if($all_categories): 
@@ -24,7 +24,7 @@ $home_posts_button = get_field('home_posts_button');
                 endif; 
                 ?>
 			</nav>
-			<div class="swiper-wrap">
+			<div class="swiper-wrap" data-aos="fade-up" data-aos-delay="250" data-aos-duration="800">
 				<div class="swiper swiper-posts">
 					<div class="swiper-wrapper">
                         <?php 

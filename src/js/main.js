@@ -87,9 +87,7 @@ function initProductFilter() {
 
 		$filterTitle.on("click", function () {
 			$filterContent.slideToggle();
-			$filterTitle
-				.find("em")
-				.toggleClass("fa-chevron-up fa-chevron-down");
+			$filterTitle.find("i").css("transform", "rotate(180deg)");
 		});
 	});
 }
