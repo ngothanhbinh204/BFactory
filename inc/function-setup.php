@@ -21,7 +21,9 @@ define('THEME_INC', THEME_DIR . '/inc');
  */
 
 add_action('wp_enqueue_scripts', 'canhcam_style');
-
+wp_localize_script('main', 'AppConfig', [
+    'themeUri' => get_template_directory_uri(),
+]);
 function canhcam_style()
 {
 	/**
@@ -101,7 +103,7 @@ function add_css_admin_menu()
 {
 	if (is_user_logged_in()) {
 ?>
-		
+
 <?php
 	}
 }

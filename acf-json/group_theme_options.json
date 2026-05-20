@@ -195,6 +195,79 @@
                     "type": "url"
                 }
             ]
+        },
+        {
+            "key": "field_tab_popup_subscribe",
+            "label": "Popup Subscribe",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_popup_subscribe_enabled",
+            "label": "Bật popup subscribe",
+            "name": "popup_subscribe_enabled",
+            "type": "true_false",
+            "ui": 1,
+            "default_value": 1
+        },
+        {
+            "key": "field_popup_subscribe_media",
+            "label": "Ảnh bên trái popup",
+            "name": "popup_subscribe_media",
+            "type": "image",
+            "return_format": "url",
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_popup_subscribe_logo",
+            "label": "Logo popup",
+            "name": "popup_subscribe_logo",
+            "type": "image",
+            "return_format": "url",
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_popup_subscribe_title",
+            "label": "Tiêu đề",
+            "name": "popup_subscribe_title",
+            "type": "text",
+            "default_value": "Đăng ký nhận thông tin"
+        },
+        {
+            "key": "field_popup_subscribe_desc",
+            "label": "Mô tả",
+            "name": "popup_subscribe_desc",
+            "type": "textarea",
+            "rows": 3
+        },
+        {
+            "key": "field_popup_subscribe_form_shortcode",
+            "label": "Form Shortcode",
+            "name": "popup_subscribe_form_shortcode",
+            "type": "text",
+            "instructions": "VD: [contact-form-7 id=\"123\" title=\"Subscribe\"]"
+        },
+        {
+            "key": "field_popup_subscribe_email_placeholder",
+            "label": "Placeholder Email (fallback)",
+            "name": "popup_subscribe_email_placeholder",
+            "type": "text",
+            "default_value": "Nhập Email của bạn..."
+        },
+        {
+            "key": "field_popup_subscribe_consent_text",
+            "label": "Nội dung đồng ý điều khoản (fallback)",
+            "name": "popup_subscribe_consent_text",
+            "type": "text",
+            "default_value": "Tôi đồng ý với điều khoản điều kiện."
+        },
+        {
+            "key": "field_popup_subscribe_submit_text",
+            "label": "Nút gửi (fallback)",
+            "name": "popup_subscribe_submit_text",
+            "type": "text",
+            "default_value": "Gửi"
         }
     ],
     "location": [

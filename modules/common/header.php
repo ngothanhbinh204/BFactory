@@ -21,9 +21,6 @@ $header_logo_mobile = get_field('header_logo_mobile', 'option') ?: THEME_URI . '
 				</form>
 				<div class="header-action">
 					<div class="header-language">
-						<!-- <?php if ( shortcode_exists( 'custom_wpml_switcher' ) ) : ?>
-                            <?php echo do_shortcode('[custom_wpml_switcher]'); ?>
-                        <?php endif; ?> -->
 						<div class="google-translate-wrapper">
 							<div class="google-language">
 								<div id="google_translate_element"></div>

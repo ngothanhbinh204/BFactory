@@ -16,6 +16,16 @@ $footer_copyright = get_field('footer_copyright', 'option') ?: '© 2026 Bfactory
 $footer_brand_text = get_field('footer_brand_text', 'option') ?: 'BFBIKE - BFBIKE';
 $cta_phone = get_field('cta_phone', 'option') ?: '1900 2273 – (028) 7100 0001';
 $cta_socials = get_field('cta_socials', 'option');
+$popup_subscribe_enabled = get_field('popup_subscribe_enabled', 'option');
+$popup_subscribe_enabled = $popup_subscribe_enabled === null ? true : (bool) $popup_subscribe_enabled;
+$popup_subscribe_media = get_field('popup_subscribe_media', 'option') ?: THEME_URI . '/UI/img/popup-img.jpg';
+$popup_subscribe_logo = get_field('popup_subscribe_logo', 'option') ?: THEME_URI . '/UI/img/logo_main.svg';
+$popup_subscribe_title = get_field('popup_subscribe_title', 'option') ?: 'Đăng ký nhận thông tin';
+$popup_subscribe_desc = get_field('popup_subscribe_desc', 'option') ?: 'Bạn quan tâm đến dịch vụ tại BF-BIKE, gửi thông tin về cho các chuyên viên tư vấn của BF-BIKE để được hỗ trợ tức thì.';
+$popup_subscribe_form_shortcode = get_field('popup_subscribe_form_shortcode', 'option');
+$popup_subscribe_email_placeholder = get_field('popup_subscribe_email_placeholder', 'option') ?: 'Nhập Email của bạn...';
+$popup_subscribe_consent_text = get_field('popup_subscribe_consent_text', 'option') ?: 'Tôi đồng ý với điều khoản điều kiện.';
+$popup_subscribe_submit_text = get_field('popup_subscribe_submit_text', 'option') ?: 'Gửi';
 ?>
 <footer class="footer">
 	<div class="bg-footer"> <img class="lozad" data-src="<?= $footer_bg ?>" alt="" />
@@ -117,3 +127,52 @@ $cta_socials = get_field('cta_socials', 'option');
 		</div>
 	</div>
 </div>
+
+
+
+<?php if ($popup_subscribe_enabled): ?>
+<div class="popup-subscribe" id="popup-subscribe" aria-hidden="true" role="dialog" aria-modal="true"
+	aria-labelledby="popup-subscribe-title">
+	<div class="popup-subscribe__backdrop" data-popup-close></div>
+	<div class="popup-subscribe__dialog">
+		<button class="popup-subscribe__close" type="button" aria-label="Đóng popup" data-popup-close><i
+				class="fa-solid fa-xmark"></i></button>
+		<div class="popup-subscribe__inner">
+			<div class="popup-subscribe__media"><img class="lozad" data-src="<?= esc_url($popup_subscribe_media) ?>"
+					alt="" />
+			</div>
+			<div class="popup-subscribe__content">
+				<div class="popup-subscribe__logo"><img class="lozad" data-src="<?= esc_url($popup_subscribe_logo) ?>"
+						alt="" />
+				</div>
+				<h2 class="popup-subscribe__title" id="popup-subscribe-title"><?= esc_html($popup_subscribe_title) ?>
+				</h2>
+				<p class="popup-subscribe__desc"><?= esc_html($popup_subscribe_desc) ?></p>
+				<?php if (!empty($popup_subscribe_form_shortcode)): ?>
+				<div class="wpcf7"><?= do_shortcode($popup_subscribe_form_shortcode) ?></div>
+				<?php else: ?>
+				<div class="wpcf7">
+					<form class="wpcf7-form" novalidate action=""><span class="wpcf7-form-control-wrap"
+							data-name="your-email">
+							<input
+								class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email"
+								type="email" name="your-email"
+								placeholder="<?= esc_attr($popup_subscribe_email_placeholder) ?>" aria-required="true"
+								aria-invalid="false"></span><span class="wpcf7-form-control-wrap"
+							data-name="acceptance-consent"><span class="wpcf7-form-control wpcf7-acceptance">
+								<label>
+									<input class="wpcf7-form-control" type="checkbox" name="acceptance-consent"
+										value="1" checked><span
+										class="wpcf7-list-item-label"><?= esc_html($popup_subscribe_consent_text) ?></span>
+								</label></span></span>
+						<button class="wpcf7-form-control wpcf7-submit btn-popup-submit"
+							type="submit"><span><?= esc_html($popup_subscribe_submit_text) ?></span><i
+								class="fa-regular fa-arrow-right"></i></button>
+					</form>
+				</div>
+				<?php endif; ?>
+			</div>
+		</div>
+	</div>
+</div>
+<?php endif; ?>
